@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Анна Зуева](https://up.htmlacademy.ru/react/5/user/642335).
-* Наставник: `Неизвестно`.
+* Наставник:  [Владислав Пономарев](https://htmlacademy.ru/profile/id1366303).
 
 ---
 
