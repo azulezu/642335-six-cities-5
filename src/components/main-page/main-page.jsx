@@ -15,7 +15,6 @@ const Styles = {
 
 
 const MainPage = (props) => {
-  // eslint-disable-next-line react/prop-types
   const {placesCount} = props;
 
   return (
