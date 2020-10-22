@@ -1,18 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-const Styles = {
-  DISPLAY_NONE: {
-    display: `none`
-  },
-  WIDTH_80: {
-    width: `80%`
-  },
-  WIDTH_100: {
-    width: `100%`
-  },
-};
-
+import {Styles} from "../../const";
 
 const MainPage = (props) => {
   const {placesCount} = props;
