@@ -8,13 +8,16 @@ import OfferPage from "../offer-page/offer-page";
 
 
 const App = (props) => {
-  const {placesCount} = props;
+  const {placesCount, offers, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage placesCount={placesCount} />
+          <MainPage
+            placesCount={placesCount}
+            offers={offers}
+          />
         </Route>
 
         <Route exact path="/login">
@@ -22,11 +25,16 @@ const App = (props) => {
         </Route>
 
         <Route exact path="/favorites">
-          <FavoritesPage />
+          <FavoritesPage
+            offers={offers}
+          />
         </Route>
 
         <Route exact path="/offer/:id?">
-          <OfferPage />
+          <OfferPage
+            offer={offers[0]}
+            reviews={reviews}
+          />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -35,6 +43,8 @@ const App = (props) => {
 
 App.propTypes = {
   placesCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default App;

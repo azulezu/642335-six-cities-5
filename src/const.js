@@ -9,3 +9,5 @@ export const Styles = {
     width: `100%`
   },
 };
+
+export const MAX_RATING = 5;
