@@ -37,7 +37,7 @@ const TEXT_CONTENTS = [
 
 const generateOffer = () => {
   const images = new Array(GALLERY_LENGTH)
-    .fill(`img/apartment-${getRandomInteger(1, MAX_PHOTO)}.jpg`);
+    .fill(`img/apartment-0${getRandomInteger(1, MAX_PHOTO)}.jpg`);
   const id = `id` + nanoid();
   const avatar = `img/avatar-${getRandomBoolean() ? `max` : `angelina`}.jpg`;
   return {
