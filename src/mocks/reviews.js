@@ -7,6 +7,7 @@ const TEXT_CONTENT = `A quiet cozy and picturesque that hides behind a a river b
 const generateReview = () => {
   const avatar = `img/avatar-${getRandomBoolean() ? `max` : `angelina`}.jpg`;
   return {
+    offerId: ``,
     avatar,
     userName: getRandomArrayItem(USER_NAMES),
     rating: getRandomInteger(1, MAX_RATING),

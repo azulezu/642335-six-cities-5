@@ -1,3 +1,4 @@
+import {nanoid} from 'nanoid';
 import {MAX_RATING} from "../const";
 import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getRandomItems} from "./utils";
 
@@ -37,8 +38,10 @@ const TEXT_CONTENTS = [
 const generateOffer = () => {
   const images = new Array(GALLERY_LENGTH)
     .fill(`img/apartment-${getRandomInteger(1, MAX_PHOTO)}.jpg`);
+  const id = `id` + nanoid();
   const avatar = `img/avatar-${getRandomBoolean() ? `max` : `angelina`}.jpg`;
   return {
+    id,
     images,
     name: getRandomArrayItem(PLACE_NAMES),
     isBookmarked: getRandomBoolean(),
