@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {convertRatingToStyle} from "../../const";
 
 const PlaceCard = (props) => {
-  const {offer, onHover} = props;
+  const {offer, onHover, onClick} = props;
 
   return (
     <article
@@ -12,6 +12,10 @@ const PlaceCard = (props) => {
       }}
       onMouseLeave={() => {
         onHover(null);
+      }}
+      onClick={(evt) => {
+        evt.preventDefault();
+        onClick(offer.id);
       }}
       className="cities__place-card place-card"
     >
@@ -59,6 +63,8 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   onHover: PropTypes.func.isRequired,
+
+  onClick: PropTypes.func.isRequired,
 
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,

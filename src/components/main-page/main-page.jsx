@@ -5,7 +5,7 @@ import PlacesList from "../places-list/places-list";
 
 
 const MainPage = (props) => {
-  const {placesCount, offers} = props;
+  const {placesCount, offers, onCardClick} = props;
 
   return (
     <React.Fragment>
@@ -103,7 +103,10 @@ const MainPage = (props) => {
                   </ul>
                 </form>
 
-                <PlacesList offers={offers} />
+                <PlacesList
+                  offers={offers}
+                  onCardClick={onCardClick}
+                />
               </section>
 
               <div className="cities__right-section">
@@ -121,6 +124,7 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   placesCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
+  onCardClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;
