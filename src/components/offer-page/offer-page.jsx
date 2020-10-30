@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {convertRatingToStyle} from "../../const";
 import PlaceCardNear from "../place-card-near/place-card-near";
 import ReviewsList from "../reviews-list/reviews-list";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Styles} from "../../const";
-import PlacesList from '../places-list/places-list';
+import PlacesList from "../places-list/places-list";
 
 
 const MainPage = (props) => {

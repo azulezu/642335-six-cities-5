@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import PlaceCardFavorite from '../place-card-favorite/place-card-favorite';
+import PropTypes from "prop-types";
+import PlaceCardFavorite from "../place-card-favorite/place-card-favorite";
 
 const FavoritesPage = (props) => {
   const {offers} = props;

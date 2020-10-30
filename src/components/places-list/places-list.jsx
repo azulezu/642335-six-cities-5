@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import PlaceCard from '../place-card/place-card';
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
+import PlaceCard from "../place-card/place-card";
 
 class PlacesList extends PureComponent {
   constructor(props) {
