@@ -34,6 +34,7 @@ const App = (props) => {
           <OfferPage
             offer={offers[0]}
             reviews={reviews}
+            offers={offers}
           />
         </Route>
       </Switch>
