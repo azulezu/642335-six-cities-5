@@ -5,7 +5,3 @@ export const Styles = {
 };
 
 export const MAX_RATING = 5;
-
-export const convertRatingToStyle = (rating) => {
-  return {width: rating * 20 + `%`};
-};

@@ -14,7 +14,6 @@ class CommentForm extends PureComponent {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    // alert(`rating: ${this.state.rating}\ntext: ${this.state.text}`);
   }
 
   handleRatingChange(evt) {

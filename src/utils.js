@@ -1,3 +1,5 @@
+import {MAX_RATING} from "./const";
+
 export const getRandomInteger = (min, max) => {
   return min + Math.floor((max - min + 1) * Math.random());
 };
@@ -22,4 +24,8 @@ export const getDateWithinDecade = () => {
   const decade = new Date(startDate.getFullYear() - 10, 0, 0);
   const diffValue = Math.random() * (startDate.getTime() - decade.getTime());
   return new Date(startDate.getTime() - diffValue);
+};
+
+export const convertRatingToStyle = (rating) => {
+  return {width: Math.round(rating * 100 / MAX_RATING) + `%`};
 };

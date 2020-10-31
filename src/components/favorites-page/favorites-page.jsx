@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {OfferPropTypes} from "../app/app-prop-types";
 import PlaceCardFavorite from "../place-card-favorite/place-card-favorite";
 
 const FavoritesPage = (props) => {
@@ -93,9 +94,7 @@ const FavoritesPage = (props) => {
 };
 
 FavoritesPage.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  })).isRequired,
+  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
 };
 
 export default FavoritesPage;

@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {convertRatingToStyle} from "../../const";
+import {ReviewPropTypes} from "../app/app-prop-types";
+import {convertRatingToStyle} from "../../utils";
 
 const Review = (props) => {
   const {review} = props;
@@ -37,13 +37,7 @@ const Review = (props) => {
 };
 
 Review.propTypes = {
-  review: PropTypes.shape({
-    avatar: PropTypes.string.isRequired,
-    userName: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    time: PropTypes.instanceOf(Date).isRequired,
-  }).isRequired,
+  review: ReviewPropTypes.isRequired,
 };
 
 export default Review;

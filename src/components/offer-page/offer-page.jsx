@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {convertRatingToStyle} from "../../const";
+import {OfferPropTypes, ReviewPropTypes} from "../app/app-prop-types";
+import {convertRatingToStyle} from "../../utils";
 import PlaceCardNear from "../place-card-near/place-card-near";
 import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
@@ -170,30 +171,9 @@ const OfferPage = (props) => {
 };
 
 OfferPage.propTypes = {
-  offer: PropTypes.PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    name: PropTypes.string.isRequired,
-    isMarked: PropTypes.bool.isRequired,
-    isBookmarked: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    adults: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    insideItems: PropTypes.arrayOf(PropTypes.string.isRequired),
-    host: {
-      avatar: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
-    }.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
-
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  })).isRequired,
-
-  reviews: PropTypes.array.isRequired,
+  offer: OfferPropTypes.isRequired,
+  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  reviews: PropTypes.arrayOf(ReviewPropTypes).isRequired,
 };
 
 export default OfferPage;

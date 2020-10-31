@@ -1,6 +1,6 @@
 import {nanoid} from 'nanoid';
 import {MAX_RATING} from "../const";
-import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getRandomItems} from "./utils";
+import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getRandomItems} from "../utils";
 
 const GALLERY_LENGTH = 6;
 const MAX_PHOTO = 3;

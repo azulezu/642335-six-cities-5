@@ -1,6 +1,6 @@
 import {nanoid} from 'nanoid';
 import {MAX_RATING} from "../const";
-import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getDateWithinDecade} from "./utils";
+import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getDateWithinDecade} from "../utils";
 
 const USER_NAMES = [`Max`, `Mohamed`, `Mary`, `Matthew`, `Marcus`];
 const TEXT_CONTENTS = [

@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {convertRatingToStyle} from "../../const";
+import {OfferPropTypes} from "../app/app-prop-types";
+import {convertRatingToStyle} from "../../utils";
 
 const PlaceCardFavorite = (props) => {
   const {offer} = props;
@@ -49,14 +49,7 @@ const PlaceCardFavorite = (props) => {
 };
 
 PlaceCardFavorite.propTypes = {
-  offer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    name: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  }).isRequired,
+  offer: OfferPropTypes.isRequired,
 };
 
 export default PlaceCardFavorite;
