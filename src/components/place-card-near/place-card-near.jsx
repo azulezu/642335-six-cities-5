@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {OfferPropTypes} from "../app/app-prop-types";
 import {convertRatingToStyle} from "../../utils";
 
@@ -8,9 +9,9 @@ const PlaceCardNear = (props) => {
   return (
     <article className="near-places__card place-card" >
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" src={offer.images[0]} width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
 
       <div className="place-card__info">
@@ -40,7 +41,9 @@ const PlaceCardNear = (props) => {
         </div>
 
         <h2 className="place-card__name">
-          <a href="#">{offer.name}</a>
+          <Link to={`/offer/${offer.id}`}>
+            {offer.name}
+          </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

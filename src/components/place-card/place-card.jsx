@@ -1,10 +1,11 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {OfferPropTypes} from "../app/app-prop-types";
 import {convertRatingToStyle} from "../../utils";
 
 const PlaceCard = (props) => {
-  const {offer, onHover, onClick} = props;
+  const {offer, onHover} = props;
 
   return (
     <article
@@ -14,20 +15,15 @@ const PlaceCard = (props) => {
       onMouseLeave={() => {
         onHover(null);
       }}
-      onClick={(evt) => {
-        evt.preventDefault();
-        onClick(offer.id);
-      }}
       className="cities__place-card place-card"
     >
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" src={offer.images[0]} width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
 
       <div className="place-card__info">
-
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
@@ -54,7 +50,9 @@ const PlaceCard = (props) => {
         </div>
 
         <h2 className="place-card__name">
-          <a href="#">{offer.name}</a>
+          <Link to={`/offer/${offer.id}`}>
+            {offer.name}
+          </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
@@ -65,7 +63,6 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   onHover: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
   offer: OfferPropTypes.isRequired,
 };
 

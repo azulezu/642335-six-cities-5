@@ -14,15 +14,12 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/"
-          render={({history}) => (
-            <MainPage
-              placesCount={placesCount}
-              offers={offers}
-              onCardClick={(cardId) => history.push(`/offer/${cardId}`)}
-            />
-          )}
-        ></Route>
+        <Route exact path="/">
+          <MainPage
+            placesCount={placesCount}
+            offers={offers}
+          />
+        </Route>
 
         <Route exact path="/login">
           <LoginPage />
@@ -34,12 +31,16 @@ const App = (props) => {
           />
         </Route>
 
-        <Route exact path="/offer/:id?">
-          <OfferPage
-            offer={offers[0]}
-            reviews={reviews}
-            offers={offers}
-          />
+        <Route exact path="/offer/:id?"
+          render={({match}) => (
+            <OfferPage
+              offer={offers.find((offer) => offer.id === match.params.id) || offers[0]}
+              reviews={reviews}
+              offers={offers}
+            />
+          )
+          }
+        >
         </Route>
       </Switch>
     </BrowserRouter>

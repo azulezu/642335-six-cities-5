@@ -20,7 +20,7 @@ class PlacesList extends PureComponent {
   }
 
   render() {
-    const {offers, onCardClick} = this.props;
+    const {offers} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
@@ -29,7 +29,6 @@ class PlacesList extends PureComponent {
             key={offer.id}
             offer={offer}
             onHover={this._handlePlaceCardHover}
-            onClick={onCardClick}
           />
         )}
       </div>
@@ -39,7 +38,6 @@ class PlacesList extends PureComponent {
 
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
-  onCardClick: PropTypes.func.isRequired,
 };
 
 export default PlacesList;

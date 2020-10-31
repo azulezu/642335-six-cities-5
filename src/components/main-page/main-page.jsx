@@ -5,7 +5,7 @@ import IconsSprite from "../icons-sprite/icons-sprite";
 import PlacesList from "../places-list/places-list";
 
 const MainPage = (props) => {
-  const {placesCount, offers, onCardClick} = props;
+  const {placesCount, offers} = props;
 
   return (
     <React.Fragment>
@@ -103,7 +103,6 @@ const MainPage = (props) => {
 
                 <PlacesList
                   offers={offers}
-                  onCardClick={onCardClick}
                 />
               </section>
 
@@ -122,7 +121,6 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
-  onCardClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;
