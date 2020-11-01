@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {OfferPropTypes} from "../app/app-prop-types";
 import IconsSprite from "../icons-sprite/icons-sprite";
 import PlacesList from "../places-list/places-list";
+import Map from "../map/map";
 
 const MainPage = (props) => {
   const {placesCount, offers} = props;
@@ -107,7 +108,11 @@ const MainPage = (props) => {
               </section>
 
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <section className="cities__map map">
+                  <Map
+                    offers={offers}
+                  />
+                </section>
               </div>
 
             </div>
