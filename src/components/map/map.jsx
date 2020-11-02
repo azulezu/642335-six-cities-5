@@ -6,23 +6,13 @@ import "leaflet/dist/leaflet.css";
 import {Styles, MapSetting} from "../../const";
 
 class Map extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
-    const {offers} = this.props;
-
     this._map = leaflet.map(`map-container`, {
       center: MapSetting.CITY,
       zoom: MapSetting.ZOOM,
       zoomControl: MapSetting.ZOOM_CONTROL,
       marker: true,
-    });
-
-    this._icon = leaflet.icon({
-      iconUrl: MapSetting.ICON_URL,
-      iconSize: MapSetting.ICON_SIZE,
     });
 
     this._map.setView(MapSetting.CITY, MapSetting.ZOOM);
@@ -32,18 +22,30 @@ class Map extends PureComponent {
       })
       .addTo(this._map);
 
+    this._drawMarkers();
+  }
 
-    const icon = this._icon;
-    for (const offer of offers) {
-      leaflet
-       .marker(offer.coords, {icon})
-       .addTo(this._map);
-    }
+  componentDidUpdate() {
+    this._drawMarkers();
   }
 
   componentWillUnmount() {
     this._map = null;
-    this._icon = null;
+  }
+
+  _drawMarkers() {
+    const {offers, activeOfferId} = this.props;
+
+    for (const offer of offers) {
+      const icon = leaflet.icon({
+        iconUrl: (offer.id === activeOfferId) ? MapSetting.ACTIVE_ICON_URL
+          : MapSetting.ICON_URL,
+        iconSize: MapSetting.ICON_SIZE,
+      });
+      leaflet
+       .marker(offer.coords, {icon})
+       .addTo(this._map);
+    }
   }
 
   render() {
@@ -61,6 +63,7 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  activeOfferId: PropTypes.string.isRequired,
 };
 
 export default Map;

@@ -7,16 +7,12 @@ import PlaceCard from "../place-card/place-card";
 class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      activePlaceCard: null,
-    };
     this._handlePlaceCardHover = this._handlePlaceCardHover.bind(this);
   }
 
   _handlePlaceCardHover(id) {
-    this.setState({
-      activePlaceCard: id,
-    });
+    const {onChangeActiveOffer} = this.props;
+    onChangeActiveOffer(id);
   }
 
   render() {
@@ -38,6 +34,7 @@ class PlacesList extends PureComponent {
 
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  onChangeActiveOffer: PropTypes.func.isRequired,
 };
 
 export default PlacesList;
