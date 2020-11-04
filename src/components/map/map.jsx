@@ -49,8 +49,6 @@ class Map extends PureComponent {
   }
 
   render() {
-    // ❓
-    // const style = {...Styles.WIDTH_100, ...Styles.HEIGHT_100};
     const style = Object.assign({}, Styles.WIDTH_100, Styles.HEIGHT_100);
 
     return (

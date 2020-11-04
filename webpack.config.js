@@ -25,8 +25,12 @@ module.exports = {
               test: /\.css$/i,
               use: ['style-loader',  'css-loader']
             },
-            { test: /\.png$/,
-              use: ['file-loader']
+            { test: /leaflet.+\.png$/i,
+              loader: 'file-loader',
+              options: {
+                name: 'leaflet/[name].[ext]',
+                outputPath: 'img',
+              },
             },
         ],
     },
