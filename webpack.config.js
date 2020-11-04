@@ -20,7 +20,18 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                 },
-            }
+            },
+            {
+              test: /\.css$/i,
+              use: ['style-loader',  'css-loader']
+            },
+            { test: /leaflet.+\.png$/i,
+              loader: 'file-loader',
+              options: {
+                name: 'leaflet/[name].[ext]',
+                outputPath: 'img',
+              },
+            },
         ],
     },
     resolve: {
