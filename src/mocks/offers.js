@@ -1,5 +1,5 @@
 import {nanoid} from 'nanoid';
-import {MAX_RATING} from "../const";
+import {MAX_RATING, PlaceTypes} from "../const";
 import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getRandomItems} from "../utils";
 
 const GALLERY_LENGTH = 6;
@@ -9,7 +9,6 @@ const MAX_ADULTS = 5;
 const MIN_PRICE = 30;
 const MAX_PRICE = 200;
 const HOST_NAMES = [`Angelina`, `Alex`, `Anne`, `Andrew`];
-const PLACE_TYPES = [`Apartment`, `Private room`];
 const PLACE_NAMES = [
   `Beautiful & luxurious apartment at great location`,
   `Wood and stone place`,
@@ -54,7 +53,7 @@ const generateOffer = (coords) => {
     isMarked: getRandomBoolean(),
     isBookmarked: getRandomBoolean(),
     rating: getRandomInteger(1, MAX_RATING),
-    type: getRandomArrayItem(PLACE_TYPES),
+    type: getRandomArrayItem(Object.keys(PlaceTypes)),
     bedrooms: getRandomInteger(1, MAX_BEDROOMS),
     adults: getRandomInteger(1, MAX_ADULTS),
     price: getRandomInteger(MIN_PRICE, MAX_PRICE),

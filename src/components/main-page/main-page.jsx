@@ -4,6 +4,7 @@ import {OfferPropTypes} from "../app/app-prop-types";
 import IconsSprite from "../icons-sprite/icons-sprite";
 import PlacesList from "../places-list/places-list";
 import Map from "../map/map";
+import {sitePages} from "../../const";
 
 class MainPage extends PureComponent {
   constructor(props) {
@@ -120,6 +121,7 @@ class MainPage extends PureComponent {
                   <PlacesList
                     offers={offers}
                     onChangeActiveOffer={this._handlerSetActiveOffer}
+                    sitePage={sitePages.MAIN}
                   />
                 </section>
 

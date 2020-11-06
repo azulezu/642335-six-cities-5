@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropTypes} from "../app/app-prop-types";
-import PlaceCardFavorite from "../place-card-favorite/place-card-favorite";
+import PlacesList from "../places-list/places-list";
+import {sitePages} from "../../const";
 
 const FavoritesPage = (props) => {
   const {offers} = props;
@@ -48,16 +49,10 @@ const FavoritesPage = (props) => {
                     </a>
                   </div>
                 </div>
-                <div className="favorites__places">
-                  {offers
-                    .slice(0, 2)
-                    .map((offer) =>
-                      <PlaceCardFavorite
-                        key={offer.id}
-                        offer={offer}
-                      />
-                    )}
-                </div>
+                <PlacesList
+                  offers={offers.slice(0, 2)}
+                  sitePage={sitePages.FAVORITES}
+                />
               </li>
 
               <li className="favorites__locations-items">
@@ -68,16 +63,10 @@ const FavoritesPage = (props) => {
                     </a>
                   </div>
                 </div>
-                <div className="favorites__places">
-                  {offers
-                  .slice(0, 1)
-                  .map((offer) =>
-                    <PlaceCardFavorite
-                      key={offer.id}
-                      offer={offer}
-                    />
-                  )}
-                </div>
+                <PlacesList
+                  offers={offers.slice(0, 1)}
+                  sitePage={sitePages.FAVORITES}
+                />
               </li>
             </ul>
           </section>

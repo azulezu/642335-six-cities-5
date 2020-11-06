@@ -22,3 +22,33 @@ export const MapSetting = {
   TILE_LAYER: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
   ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
 };
+
+export const PlaceTypes = {
+  apartment: `Apartment`,
+  room: `Private Room`,
+  house: `House`,
+  hotel: `Hotel`,
+};
+
+export const sitePages = {
+  MAIN: `main-page`,
+  OFFER: `offer-page`,
+  FAVORITES: `favorites-page`,
+};
+
+export const cardModificators = {
+  CITIES: `cities`,
+  NEAR: `near-places`,
+  FAVORITES: `favorites`,
+};
+
+export const PlaceCardImageSizes = {
+  BIG: {
+    width: `260`,
+    height: `200`
+  },
+  SMALL: {
+    width: `150`,
+    height: `110`
+  },
+};
