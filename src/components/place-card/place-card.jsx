@@ -22,16 +22,13 @@ const getImageClassName = (modificator) =>
 
 
 const PlaceCard = (props) => {
-  const {offer, onHover, modificator} = props;
+  const {offer, modificator} = props;
+  const {onEvent} = props;
 
   return (
     <article
-      onMouseEnter={() => {
-        onHover(offer.id);
-      }}
-      onMouseLeave={() => {
-        onHover(null);
-      }}
+      onMouseEnter={onEvent ? () => onEvent(offer.id) : null}
+      onMouseLeave={onEvent ? () => onEvent(null) : null}
       className={`place-card ${getArticleClassName(modificator)}`}
     >
 
@@ -88,7 +85,7 @@ const PlaceCard = (props) => {
 
 
 PlaceCard.propTypes = {
-  onHover: PropTypes.func.isRequired,
+  onEvent: PropTypes.func,
   offer: OfferPropTypes.isRequired,
   modificator: PropTypes.string,
 };

@@ -7,6 +7,9 @@ import Map from "../map/map";
 import Header from "../header/header";
 import {sitePages} from "../../const";
 import withMapMarkers from "../../hocs/with-map-markers";
+import withTransitHandler from "../../hocs/with-transit-handler";
+
+const PlacesListWrapped = withTransitHandler(PlacesList);
 
 const MainPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
@@ -83,10 +86,10 @@ const MainPage = (props) => {
                   </ul>
                 </form>
 
-                <PlacesList
+                <PlacesListWrapped
                   offers={offers}
-                  onChangeActiveOffer={onChangeActiveOffer}
-                  sitePage={sitePages.MAIN}
+                  onEvent={onChangeActiveOffer}
+                  sitePage={sitePages.OFFER}
                 />
               </section>
 

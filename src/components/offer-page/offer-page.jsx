@@ -9,10 +9,13 @@ import Map from "../map/map";
 import Header from "../header/header";
 import {sitePages} from "../../const";
 import withMapMarkers from "../../hocs/with-map-markers";
+import withTransitHandler from "../../hocs/with-transit-handler";
 
 const OfferPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
   const {offer: currentOffer, offers, reviews} = props;
+
+  const PlacesListWrapped = withTransitHandler(PlacesList);
 
   return (
     <div className="page">
@@ -138,11 +141,13 @@ const OfferPage = (props) => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlacesList
+
+            <PlacesListWrapped
               offers={offers}
-              onChangeActiveOffer={onChangeActiveOffer}
+              onEvent={onChangeActiveOffer}
               sitePage={sitePages.OFFER}
             />
+
           </section>
         </div>
       </main>
