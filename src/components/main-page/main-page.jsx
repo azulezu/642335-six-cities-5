@@ -89,7 +89,7 @@ const MainPage = (props) => {
                 <PlacesListWrapped
                   offers={offers}
                   onEvent={onChangeActiveOffer}
-                  sitePage={sitePages.OFFER}
+                  sitePage={sitePages.MAIN}
                 />
               </section>
 
