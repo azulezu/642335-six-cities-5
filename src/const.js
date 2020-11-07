@@ -30,19 +30,19 @@ export const PlaceTypes = {
   hotel: `Hotel`,
 };
 
-export const sitePages = {
+export const SitePages = {
   MAIN: `main-page`,
   OFFER: `offer-page`,
   FAVORITES: `favorites-page`,
 };
 
-export const cardModificators = {
+export const CardModificators = {
   CITIES: `cities`,
   NEAR: `near-places`,
   FAVORITES: `favorites`,
 };
 
-export const PlaceCardImageSizes = {
+export const CardImageSizes = {
   BIG: {
     width: `260`,
     height: `200`

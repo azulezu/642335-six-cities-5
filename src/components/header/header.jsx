@@ -1,34 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {sitePages} from "../../const";
 
-const Header = (props) => {
-  const {sitePage} = props;
-
-  const getLogo = (page) => {
-    return (page === sitePages.MAIN)
-      ? (
-        <a className="header__logo-link header__logo-link--active">
-          <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-        </a>
-      )
-      : (
-        <Link className="header__logo-link"
-          to={`/`}
-        >
-          <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-        </Link>
-      );
-  };
-
-
+const Header = () => {
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            {getLogo(sitePage)}
+            <Link className="header__logo-link"
+              to={`/`}
+            >
+              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+            </Link>
           </div>
 
           <nav className="header__nav">
@@ -49,10 +32,6 @@ const Header = (props) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  sitePage: PropTypes.string,
 };
 
 export default Header;

@@ -3,15 +3,15 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {OfferPropTypes} from "../app/app-prop-types";
 import {convertRatingToStyle} from "../../utils";
-import {PlaceTypes, PlaceCardImageSizes} from "../../const";
-import {cardModificators} from "../../const";
+import {PlaceTypes, CardImageSizes} from "../../const";
+import {CardModificators} from "../../const";
 
 const getArticleClassName = (modificator) => {
   switch (modificator) {
-    case cardModificators.CITIES:
+    case CardModificators.CITIES:
       return `${modificator}__place-card`;
-    case cardModificators.NEAR:
-    case cardModificators.FAVORITES:
+    case CardModificators.NEAR:
+    case CardModificators.FAVORITES:
       return `${modificator}__card`;
   }
   return ``;
@@ -36,12 +36,12 @@ const PlaceCard = (props) => {
         <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" alt="Place image"
             src={offer.images[0]}
-            width={modificator === cardModificators.FAVORITES
-              ? PlaceCardImageSizes.SMALL.width
-              : PlaceCardImageSizes.BIG.width}
-            height={modificator === cardModificators.FAVORITES
-              ? PlaceCardImageSizes.SMALL.height
-              : PlaceCardImageSizes.BIG.height}
+            width={modificator === CardModificators.FAVORITES
+              ? CardImageSizes.SMALL.width
+              : CardImageSizes.BIG.width}
+            height={modificator === CardModificators.FAVORITES
+              ? CardImageSizes.SMALL.height
+              : CardImageSizes.BIG.height}
           />
         </Link>
       </div>

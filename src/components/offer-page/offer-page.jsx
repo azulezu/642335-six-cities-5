@@ -7,7 +7,7 @@ import CommentForm from "../comment-form/comment-form";
 import PlacesList from "../places-list/places-list";
 import Map from "../map/map";
 import Header from "../header/header";
-import {sitePages} from "../../const";
+import {SitePages} from "../../const";
 import withMapMarkers from "../../hocs/with-map-markers";
 import withTransitHandler from "../../hocs/with-transit-handler";
 
@@ -145,7 +145,7 @@ const OfferPage = (props) => {
             <PlacesListWrapped
               offers={offers}
               onEvent={onChangeActiveOffer}
-              sitePage={sitePages.OFFER}
+              sitePage={SitePages.OFFER}
             />
 
           </section>

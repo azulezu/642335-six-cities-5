@@ -5,7 +5,7 @@ import IconsSprite from "../icons-sprite/icons-sprite";
 import PlacesList from "../places-list/places-list";
 import Map from "../map/map";
 import Header from "../header/header";
-import {sitePages} from "../../const";
+import {SitePages} from "../../const";
 import withMapMarkers from "../../hocs/with-map-markers";
 import withTransitHandler from "../../hocs/with-transit-handler";
 
@@ -21,7 +21,7 @@ const MainPage = (props) => {
 
       <div className="page page--gray page--main">
 
-        <Header sitePage={sitePages.MAIN} />
+        <Header />
 
         <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
@@ -89,7 +89,7 @@ const MainPage = (props) => {
                 <PlacesListWrapped
                   offers={offers}
                   onEvent={onChangeActiveOffer}
-                  sitePage={sitePages.MAIN}
+                  sitePage={SitePages.MAIN}
                 />
               </section>
 

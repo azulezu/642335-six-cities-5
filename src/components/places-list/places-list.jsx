@@ -2,64 +2,46 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropTypes} from "../app/app-prop-types";
 import PlaceCard from "../place-card/place-card";
-import PlaceCardCities from "../place-card-cities/place-card-cities";
-import PlaceCardNear from "../place-card-near/place-card-near";
-import PlaceCardFavorite from "../place-card-favorite/place-card-favorite";
-import {sitePages} from "../../const";
+import {SitePages, CardModificators} from "../../const";
 
 const PlacesList = (props) => {
   const {offers, sitePage} = props;
 
-  const getComponentByPage = (page, offer) => {
+  const getCardFormat = (page) => {
     switch (page) {
-      case sitePages.MAIN:
-        return (
-          <PlaceCardCities
-            key={offer.id}
-            offer={offer}
-            {...props}
-          />
-        );
-      case sitePages.OFFER:
-        return (
-          <PlaceCardNear
-            key={offer.id}
-            offer={offer}
-            {...props}
-          />
-        );
-      case sitePages.FAVORITES:
-        return (
-          <PlaceCardFavorite
-            key={offer.id}
-            offer={offer}
-          />
-        );
+      case SitePages.MAIN:
+        return CardModificators.CITIES;
+      case SitePages.OFFER:
+        return CardModificators.NEAR;
+      case SitePages.FAVORITES:
+        return CardModificators.FAVORITES;
+      default:
+        return ``;
     }
-    return (
-      <PlaceCard
-        key={offer.id}
-        offer={offer}
-      />
-    );
-  }; // getComponentByPage
+  };
 
   const getContainerClassName = (modificator) => {
     switch (modificator) {
-      case sitePages.MAIN:
+      case SitePages.MAIN:
         return `cities__places-list places__list tabs__content`;
-      case sitePages.OFFER:
+      case SitePages.OFFER:
         return `near-places__list places__list`;
-      case sitePages.FAVORITES:
+      case SitePages.FAVORITES:
         return `favorites__places`;
+      default:
+        return `places__list`;
     }
-    return `places__list`;
   };
 
   return (
     <div className={getContainerClassName(sitePage)}>
       {offers.map((offer) =>
-        getComponentByPage(sitePage, offer)
+        <PlaceCard
+          key={offer.id}
+          offer={offer}
+          modificator={getCardFormat(sitePage)}
+          {...props}
+        />
       )}
     </div>
   );
