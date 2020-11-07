@@ -36,7 +36,7 @@ const App = (props) => {
             <OfferPage
               offer={offers.find((offer) => offer.id === match.params.id) || offers[0]}
               reviews={reviews}
-              offers={offers}
+              offers={offers.slice(1, 4)}
             />
           )
           }

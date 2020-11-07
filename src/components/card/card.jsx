@@ -3,23 +3,46 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {OfferPropTypes} from "../app/app-prop-types";
 import {convertRatingToStyle} from "../../utils";
+import {PlaceTypes, CardImageSizes} from "../../const";
+import {CardModificators} from "../../const";
 
-const PlaceCard = (props) => {
-  const {offer, onHover} = props;
+const getArticleClassName = (modificator) => {
+  switch (modificator) {
+    case CardModificators.CITIES:
+      return `${modificator}__place-card`;
+    case CardModificators.NEAR:
+    case CardModificators.FAVORITES:
+      return `${modificator}__card`;
+  }
+  return ``;
+};
+
+const getImageClassName = (modificator) =>
+  (modificator) ? `${modificator}__image-wrapper` : ``;
+
+
+const Card = (props) => {
+  const {offer, modificator} = props;
+  const {onEvent} = props;
 
   return (
     <article
-      onMouseEnter={() => {
-        onHover(offer.id);
-      }}
-      onMouseLeave={() => {
-        onHover(null);
-      }}
-      className="cities__place-card place-card"
+      onMouseEnter={onEvent ? () => onEvent(offer.id) : null}
+      onMouseLeave={onEvent ? () => onEvent(null) : null}
+      className={`place-card ${getArticleClassName(modificator)}`}
     >
-      <div className="cities__image-wrapper place-card__image-wrapper">
+
+      <div className={`place-card__image-wrapper ${getImageClassName(modificator)}`}>
         <Link to={`/offer/${offer.id}`}>
-          <img className="place-card__image" src={offer.images[0]} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" alt="Place image"
+            src={offer.images[0]}
+            width={modificator === CardModificators.FAVORITES
+              ? CardImageSizes.SMALL.width
+              : CardImageSizes.BIG.width}
+            height={modificator === CardModificators.FAVORITES
+              ? CardImageSizes.SMALL.height
+              : CardImageSizes.BIG.height}
+          />
         </Link>
       </div>
 
@@ -54,16 +77,17 @@ const PlaceCard = (props) => {
             {offer.name}
           </Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{PlaceTypes[offer.type]}</p>
       </div>
     </article>
   );
 };
 
 
-PlaceCard.propTypes = {
-  onHover: PropTypes.func.isRequired,
+Card.propTypes = {
+  onEvent: PropTypes.func,
   offer: OfferPropTypes.isRequired,
+  modificator: PropTypes.string,
 };
 
-export default PlaceCard;
+export default Card;

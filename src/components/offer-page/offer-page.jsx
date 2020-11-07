@@ -2,41 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropTypes, ReviewPropTypes} from "../app/app-prop-types";
 import {convertRatingToStyle} from "../../utils";
-import PlaceCardNear from "../place-card-near/place-card-near";
 import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
+import CardsList from "../cards-list/cards-list";
+import Map from "../map/map";
+import Header from "../header/header";
+import {SitePages} from "../../const";
+import withMapMarkers from "../../hocs/with-map-markers";
+import withTransitHandler from "../../hocs/with-transit-handler";
 
 const OfferPage = (props) => {
+  const {activeOfferId, onChangeActiveOffer} = props;
   const {offer: currentOffer, offers, reviews} = props;
+
+  const CardsListWrapped = withTransitHandler(CardsList);
 
   return (
     <div className="page">
 
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
-            </div>
-
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
@@ -146,23 +130,24 @@ const OfferPage = (props) => {
             </div>
           </div>
 
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map
+              offers={offers}
+              activeOfferId={activeOfferId}
+            />
+          </section>
         </section>
 
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            <div className="near-places__list places__list">
-              {offers
-                .slice(1, 4)
-                .map((offer) =>
-                  <PlaceCardNear
-                    key={offer.id}
-                    offer={offer}
-                  />
-                )}
-            </div>
+            <CardsListWrapped
+              offers={offers}
+              onEvent={onChangeActiveOffer}
+              sitePage={SitePages.OFFER}
+            />
+
           </section>
         </div>
       </main>
@@ -170,10 +155,13 @@ const OfferPage = (props) => {
   );
 };
 
+
 OfferPage.propTypes = {
   offer: OfferPropTypes.isRequired,
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   reviews: PropTypes.arrayOf(ReviewPropTypes).isRequired,
+  activeOfferId: PropTypes.string,
+  onChangeActiveOffer: PropTypes.func.isRequired,
 };
 
-export default OfferPage;
+export default withMapMarkers(OfferPage);
