@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropTypes} from "../app/app-prop-types";
-import PlaceCard from "../place-card/place-card";
+import Card from "../card/card";
 import {SitePages, CardModificators} from "../../const";
 
-const PlacesList = (props) => {
+const CardsList = (props) => {
   const {offers, sitePage} = props;
 
   const getCardFormat = (page) => {
@@ -36,7 +36,7 @@ const PlacesList = (props) => {
   return (
     <div className={getContainerClassName(sitePage)}>
       {offers.map((offer) =>
-        <PlaceCard
+        <Card
           key={offer.id}
           offer={offer}
           modificator={getCardFormat(sitePage)}
@@ -47,9 +47,9 @@ const PlacesList = (props) => {
   );
 };
 
-PlacesList.propTypes = {
+CardsList.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   sitePage: PropTypes.string.isRequired,
 };
 
-export default PlacesList;
+export default CardsList;

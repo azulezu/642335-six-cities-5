@@ -21,7 +21,7 @@ const getImageClassName = (modificator) =>
   (modificator) ? `${modificator}__image-wrapper` : ``;
 
 
-const PlaceCard = (props) => {
+const Card = (props) => {
   const {offer, modificator} = props;
   const {onEvent} = props;
 
@@ -84,10 +84,10 @@ const PlaceCard = (props) => {
 };
 
 
-PlaceCard.propTypes = {
+Card.propTypes = {
   onEvent: PropTypes.func,
   offer: OfferPropTypes.isRequired,
   modificator: PropTypes.string,
 };
 
-export default PlaceCard;
+export default Card;

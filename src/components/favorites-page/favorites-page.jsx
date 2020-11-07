@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropTypes} from "../app/app-prop-types";
-import PlacesList from "../places-list/places-list";
+import CardsList from "../cards-list/cards-list";
 import Header from "../header/header";
 import {SitePages} from "../../const";
 
@@ -26,7 +26,7 @@ const FavoritesPage = (props) => {
                     </a>
                   </div>
                 </div>
-                <PlacesList
+                <CardsList
                   offers={offers.slice(0, 2)}
                   sitePage={SitePages.FAVORITES}
                 />
@@ -40,7 +40,7 @@ const FavoritesPage = (props) => {
                     </a>
                   </div>
                 </div>
-                <PlacesList
+                <CardsList
                   offers={offers.slice(0, 1)}
                   sitePage={SitePages.FAVORITES}
                 />

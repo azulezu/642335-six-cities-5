@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropTypes} from "../app/app-prop-types";
 import IconsSprite from "../icons-sprite/icons-sprite";
-import PlacesList from "../places-list/places-list";
+import CardsList from "../cards-list/cards-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import {SitePages} from "../../const";
 import withMapMarkers from "../../hocs/with-map-markers";
 import withTransitHandler from "../../hocs/with-transit-handler";
 
-const PlacesListWrapped = withTransitHandler(PlacesList);
+const CardsListWrapped = withTransitHandler(CardsList);
 
 const MainPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
@@ -86,7 +86,7 @@ const MainPage = (props) => {
                   </ul>
                 </form>
 
-                <PlacesListWrapped
+                <CardsListWrapped
                   offers={offers}
                   onEvent={onChangeActiveOffer}
                   sitePage={SitePages.MAIN}

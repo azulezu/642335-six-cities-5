@@ -4,7 +4,7 @@ import {OfferPropTypes, ReviewPropTypes} from "../app/app-prop-types";
 import {convertRatingToStyle} from "../../utils";
 import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
-import PlacesList from "../places-list/places-list";
+import CardsList from "../cards-list/cards-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import {SitePages} from "../../const";
@@ -15,7 +15,7 @@ const OfferPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
   const {offer: currentOffer, offers, reviews} = props;
 
-  const PlacesListWrapped = withTransitHandler(PlacesList);
+  const CardsListWrapped = withTransitHandler(CardsList);
 
   return (
     <div className="page">
@@ -142,7 +142,7 @@ const OfferPage = (props) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            <PlacesListWrapped
+            <CardsListWrapped
               offers={offers}
               onEvent={onChangeActiveOffer}
               sitePage={SitePages.OFFER}
