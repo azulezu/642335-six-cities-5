@@ -13,8 +13,8 @@ const getArticleClassName = (modificator) => {
     case CardModificators.NEAR:
     case CardModificators.FAVORITES:
       return `${modificator}__card`;
+    default: return ``;
   }
-  return ``;
 };
 
 const getImageClassName = (modificator) =>
