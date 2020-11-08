@@ -1,5 +1,10 @@
 import PropTypes from "prop-types";
 
+export const CityPropTypes = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  location: PropTypes.arrayOf(PropTypes.number).isRequired,
+});
+
 export const OfferPropTypes = PropTypes.shape({
   id: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -17,6 +22,7 @@ export const OfferPropTypes = PropTypes.shape({
     userName: PropTypes.string.isRequired,
   }.isRequired,
   description: PropTypes.arrayOf(PropTypes.string).isRequired,
+  city: CityPropTypes,
   coords: PropTypes.arrayOf(PropTypes.number).isRequired,
 });
 

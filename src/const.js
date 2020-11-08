@@ -11,6 +11,7 @@ export const Styles = {
 };
 
 export const MAX_RATING = 5;
+export const MAX_DISPLAYED_REVIEWS = 10;
 
 export const MapSetting = {
   CITY: [52.38333, 4.9],
@@ -52,3 +53,12 @@ export const CardImageSizes = {
     height: `110`
   },
 };
+
+export const CitiesNames = [
+  `Paris`,
+  `Cologne`,
+  `Brussels`,
+  `Amsterdam`,
+  `Hamburg`,
+  `Dusseldorf`
+];

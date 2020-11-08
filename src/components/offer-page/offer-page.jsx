@@ -122,7 +122,10 @@ const OfferPage = (props) => {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
 
-                <ReviewsList reviews={reviews} />
+                <ReviewsList
+                  reviews={reviews}
+                  offerId={currentOffer.id}
+                />
 
                 <CommentForm />
 
@@ -134,6 +137,7 @@ const OfferPage = (props) => {
             <Map
               offers={offers}
               activeOfferId={activeOfferId}
+              city={currentOffer.city}
             />
           </section>
         </section>

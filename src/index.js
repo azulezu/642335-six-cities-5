@@ -1,20 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app";
-import offers from './mocks/offers';
-import reviews from './mocks/reviews';
+import getOffers from './mocks/offers';
+import getReviews from './mocks/reviews';
 
 const Settings = {
-  PLACES_COUNT: 312,
-  OFFERS_COUNT: 4,
-  REVIEWS_COUNT: 2,
+  MAX_OFFERS_COUNT: 20,
+  REVIEWS_COUNT: 50,
 };
+const offers = getOffers(Settings.MAX_OFFERS_COUNT);
+const reviews = getReviews(Settings.REVIEWS_COUNT,
+    offers.map((offer) => (
+      {offerId: offer.id, cityName: offer.city.name}
+    ))
+);
 
 ReactDOM.render(
     <App
-      placesCount={Settings.PLACES_COUNT}
-      offers={offers(Settings.OFFERS_COUNT)}
-      reviews={reviews(Settings.REVIEWS_COUNT)}
+      offers={offers}
+      reviews={reviews}
     />,
     document.querySelector(`#root`)
 );

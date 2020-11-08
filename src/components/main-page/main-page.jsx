@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {OfferPropTypes} from "../app/app-prop-types";
+import {OfferPropTypes, CityPropTypes} from "../app/app-prop-types";
 import IconsSprite from "../icons-sprite/icons-sprite";
 import CardsList from "../cards-list/cards-list";
 import Map from "../map/map";
 import Header from "../header/header";
+import CitiesList from "../cities-list/cities-list";
 import {SitePages} from "../../const";
 import withMapMarkers from "../../hocs/with-map-markers";
 import withTransitHandler from "../../hocs/with-transit-handler";
@@ -13,7 +14,7 @@ const CardsListWrapped = withTransitHandler(CardsList);
 
 const MainPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
-  const {placesCount, offers} = props;
+  const {offers, city} = props;
 
   return (
     <React.Fragment>
@@ -28,38 +29,9 @@ const MainPage = (props) => {
 
           <div className="tabs">
             <section className="locations container">
-              <ul className="locations__list tabs__list">
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Paris</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Cologne</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Brussels</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item tabs__item--active">
-                    <span>Amsterdam</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Hamburg</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Dusseldorf</span>
-                  </a>
-                </li>
-              </ul>
+
+              <CitiesList city={city.name} />
+
             </section>
           </div>
 
@@ -68,7 +40,7 @@ const MainPage = (props) => {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+                <b className="places__found">{offers.length} places to stay in {city.name}</b>
 
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
@@ -98,6 +70,7 @@ const MainPage = (props) => {
                   <Map
                     offers={offers}
                     activeOfferId={activeOfferId}
+                    city={city}
                   />
                 </section>
               </div>
@@ -112,10 +85,10 @@ const MainPage = (props) => {
 
 
 MainPage.propTypes = {
-  placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   activeOfferId: PropTypes.string,
   onChangeActiveOffer: PropTypes.func.isRequired,
+  city: CityPropTypes.isRequired,
 };
 
 export default withMapMarkers(MainPage);

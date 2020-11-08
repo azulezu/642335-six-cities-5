@@ -8,24 +8,26 @@ const TEXT_CONTENTS = [
   `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
 ];
 
-const generateReview = () => {
+const generateReview = ({offerId, cityName}) => {
   const id = `id` + nanoid();
   const avatar = `img/avatar-${getRandomBoolean() ? `max` : `angelina`}.jpg`;
   return {
     id,
-    offerId: ``,
+    offerId,
     avatar,
     userName: getRandomArrayItem(USER_NAMES),
     rating: getRandomInteger(1, MAX_RATING),
-    text: getRandomArrayItem(TEXT_CONTENTS),
+    text: `From ${cityName}: ` + getRandomArrayItem(TEXT_CONTENTS),
     time: getDateWithinDecade(),
   };
 };
 
-const generateReviews = (count) => {
+const generateReviews = (count, offersIds) => {
   return new Array(count)
     .fill(``)
-    .map(generateReview);
+    .map(() =>
+      generateReview(getRandomArrayItem(offersIds))
+    );
 };
 
 export default generateReviews;

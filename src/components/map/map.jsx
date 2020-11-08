@@ -1,21 +1,25 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {OfferPropTypes} from "../app/app-prop-types";
+import {OfferPropTypes, CityPropTypes} from "../app/app-prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {Styles, MapSetting} from "../../const";
 
 class Map extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.city = this.props.city;
+  }
 
   componentDidMount() {
     this._map = leaflet.map(`map-container`, {
-      center: MapSetting.CITY,
+      center: this.city.location,
       zoom: MapSetting.ZOOM,
       zoomControl: MapSetting.ZOOM_CONTROL,
       marker: true,
     });
 
-    this._map.setView(MapSetting.CITY, MapSetting.ZOOM);
+    this._map.setView(this.city.location, MapSetting.ZOOM);
     leaflet
       .tileLayer(MapSetting.TILE_LAYER, {
         attribution: MapSetting.ATTRIBUTION
@@ -62,6 +66,7 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   activeOfferId: PropTypes.string,
+  city: CityPropTypes,
 };
 
 export default Map;

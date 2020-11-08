@@ -78,6 +78,7 @@ const Card = (props) => {
           </Link>
         </h2>
         <p className="place-card__type">{PlaceTypes[offer.type]}</p>
+        <p> {offer.city.name}</p>
       </div>
     </article>
   );

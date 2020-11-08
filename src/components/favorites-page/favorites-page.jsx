@@ -1,12 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {OfferPropTypes} from "../app/app-prop-types";
 import CardsList from "../cards-list/cards-list";
 import Header from "../header/header";
-import {SitePages} from "../../const";
+import FavoritesContainer from "../favorites-container/favorites-container";
+import {SitePages, CitiesNames} from "../../const";
 
 const FavoritesPage = (props) => {
   const {offers} = props;
+
+  const getFavoritesOffers = (offersList) => offersList
+    .filter((offer) => offer.isBookmarked);
+
+  const getFilteredOffers = (cityName, offersList) => offersList
+    .filter((offer) => offer.city.name === cityName);
 
   return (
     <div className="page">
@@ -18,42 +26,37 @@ const FavoritesPage = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <CardsList
-                  offers={offers.slice(0, 2)}
-                  sitePage={SitePages.FAVORITES}
-                />
-              </li>
+              {
+                CitiesNames.map((cityName) => {
+                  const filteredOffers = getFilteredOffers(cityName, getFavoritesOffers(offers));
 
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Cologne</span>
-                    </a>
-                  </div>
-                </div>
-                <CardsList
-                  offers={offers.slice(0, 1)}
-                  sitePage={SitePages.FAVORITES}
-                />
-              </li>
+                  if (!filteredOffers.length) {
+                    return ``;
+                  }
+                  return (
+                    <FavoritesContainer
+                      key={cityName}
+                      city={cityName}
+                    >
+                      <CardsList
+                        offers={filteredOffers}
+                        sitePage={SitePages.FAVORITES}
+                      />
+                    </FavoritesContainer>
+                  );
+                })
+              }
             </ul>
           </section>
         </div>
       </main>
 
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link"
+          to={`/`}
+        >
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        </Link>
       </footer>
     </div>
   );
