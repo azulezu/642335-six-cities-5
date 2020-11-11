@@ -1,6 +1,9 @@
 import {nanoid} from 'nanoid';
-import {MAX_RATING, PlaceTypes, CitiesNames} from "../const";
+import {MAX_RATING, PlaceTypes} from "../const";
 import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getRandomItems} from "../utils";
+import cities from "./cities";
+
+const MAX_OFFERS_COUNT = 20;
 
 const GALLERY_LENGTH = 6;
 const MAX_PHOTO = 3;
@@ -32,15 +35,6 @@ const INSIDE_ITEMS = [
 const TEXT_CONTENTS = [
   `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
   `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
-];
-
-const CITIES_COORDS = [
-  [48.856613, 2.352222],
-  [50.936389, 6.952778],
-  [50.85, 4.35],
-  [52.38333, 4.9],
-  [53.565278, 10.001389],
-  [51.233333, 6.783333]
 ];
 
 const getRandomCoords = ([latitude, longitude]) => {
@@ -80,16 +74,9 @@ const generateOffer = (city) => {
   };
 };
 
-const generateOffers = (maxCount) => {
-  const cities = CitiesNames.map((name, index) => (
-    {
-      name,
-      location: CITIES_COORDS[index],
-    }
-  ));
-  return new Array(getRandomInteger(1, maxCount))
+const generateOffers = () =>
+  new Array(getRandomInteger(1, MAX_OFFERS_COUNT))
     .fill(``)
     .map(() => generateOffer(getRandomArrayItem(cities)));
-};
 
 export default generateOffers;

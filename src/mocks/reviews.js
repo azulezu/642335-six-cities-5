@@ -2,6 +2,8 @@ import {nanoid} from 'nanoid';
 import {MAX_RATING} from "../const";
 import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getDateWithinDecade} from "../utils";
 
+const REVIEWS_COUNT = 50;
+
 const USER_NAMES = [`Max`, `Mohamed`, `Mary`, `Matthew`, `Marcus`];
 const TEXT_CONTENTS = [
   `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
@@ -22,8 +24,12 @@ const generateReview = ({offerId, cityName}) => {
   };
 };
 
-const generateReviews = (count, offersIds) => {
-  return new Array(count)
+const generateReviews = (offers) => {
+  const offersIds = offers.map((offer) => (
+    {offerId: offer.id, cityName: offer.city.name}
+  ));
+
+  return new Array(REVIEWS_COUNT)
     .fill(``)
     .map(() =>
       generateReview(getRandomArrayItem(offersIds))
