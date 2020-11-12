@@ -11,7 +11,7 @@ class Map extends PureComponent {
   constructor(props) {
     super(props);
     // props.city - строка с названием
-    // Map.city - объект с координатами и названием
+    // Map.city - объект {name: `city`, location: [latitude, longitude]}
     this.city = cities.find((city) => city.name === this.props.city);
   }
 
@@ -21,10 +21,16 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
+    if (this.city && this.city.name !== this.props.city) {
+      this.city = cities.find((city) => city.name === this.props.city);
+      this._map.remove();
+      this._initMap();
+    }
     this._drawMarkers();
   }
 
   componentWillUnmount() {
+    this._map.remove();
     this._map = null;
   }
 

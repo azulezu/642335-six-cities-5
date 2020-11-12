@@ -1,9 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 import {CitiesNames} from "../../const";
 
 const CitiesList = (props) => {
-  const {city} = props;
+  const {city, changeCity, selectOffers} = props;
+
+  const onCityTabClick = (evt) => {
+    evt.preventDefault();
+    changeCity(evt.currentTarget.dataset.city);
+    selectOffers();
+  };
 
   const getTabsItemClassName = (currentCity) => (
     `locations__item-link tabs__item ${currentCity === city
@@ -17,6 +25,8 @@ const CitiesList = (props) => {
           key={cityName}
         >
           <a className={getTabsItemClassName(cityName)}
+            onClick={onCityTabClick}
+            data-city={cityName}
             href="#"
           >
             <span>{cityName}</span>
@@ -29,6 +39,21 @@ const CitiesList = (props) => {
 
 CitiesList.propTypes = {
   city: PropTypes.string.isRequired,
+  changeCity: PropTypes.func.isRequired,
+  selectOffers: PropTypes.func.isRequired,
 };
 
-export default CitiesList;
+const mapStateToProps = () => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  selectOffers() {
+    dispatch(ActionCreator.selectOffers());
+  },
+  changeCity(cityName) {
+    dispatch(ActionCreator.changeCity(cityName));
+  },
+});
+
+export {CitiesList};
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
