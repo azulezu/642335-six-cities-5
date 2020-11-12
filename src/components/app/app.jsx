@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {OfferPropTypes, ReviewPropTypes} from "./app-prop-types";
+import OfferPropTypes from "../offer-page/offer.prop";
+import ReviewPropTypes from "../review/review.prop";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import FavoritesPage from "../favorites-page/favorites-page";

@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
-import {OfferPropTypes} from "../app/app-prop-types";
+import OfferPropTypes from "../offer-page/offer.prop";
 import {convertRatingToStyle} from "../../utils";
 import {PlaceTypes, CardImageSizes} from "../../const";
 import {CardModificators} from "../../const";
@@ -78,7 +78,11 @@ const Card = (props) => {
           </Link>
         </h2>
         <p className="place-card__type">{PlaceTypes[offer.type]}</p>
-        <p> {offer.city.name}</p>
+
+        <p className="debug-info"
+          style={({backgroundColor: `#ffffcc`})}
+        >{offer.city}</p>
+
       </div>
     </article>
   );

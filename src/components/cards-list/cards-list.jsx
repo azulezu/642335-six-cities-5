@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {OfferPropTypes} from "../app/app-prop-types";
+import OfferPropTypes from "../offer-page/offer.prop";
 import Card from "../card/card";
 import {SitePages, CardModificators} from "../../const";
 

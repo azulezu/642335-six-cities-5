@@ -1,11 +1,6 @@
 import PropTypes from "prop-types";
 
-export const CityPropTypes = PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  location: PropTypes.arrayOf(PropTypes.number).isRequired,
-});
-
-export const OfferPropTypes = PropTypes.shape({
+const OfferPropTypes = PropTypes.shape({
   id: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   name: PropTypes.string.isRequired,
@@ -22,14 +17,8 @@ export const OfferPropTypes = PropTypes.shape({
     userName: PropTypes.string.isRequired,
   }.isRequired,
   description: PropTypes.arrayOf(PropTypes.string).isRequired,
-  city: CityPropTypes,
+  city: PropTypes.string.isRequired,
   coords: PropTypes.arrayOf(PropTypes.number).isRequired,
 });
 
-export const ReviewPropTypes = PropTypes.shape({
-  avatar: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  time: PropTypes.instanceOf(Date).isRequired,
-});
+export default OfferPropTypes;

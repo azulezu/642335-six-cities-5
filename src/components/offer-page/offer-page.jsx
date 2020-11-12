@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {OfferPropTypes, ReviewPropTypes} from "../app/app-prop-types";
+import OfferPropTypes from "./offer.prop";
+import ReviewPropTypes from "../review/review.prop";
 import {convertRatingToStyle} from "../../utils";
 import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
@@ -13,7 +14,10 @@ import withTransitHandler from "../../hocs/with-transit-handler";
 
 const OfferPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
-  const {offer: currentOffer, offers, reviews} = props;
+  const {offer: currentOffer, offers: nearOffers, reviews} = props;
+
+  const selectedReview = reviews.slice()
+    .filter((review) => currentOffer.id === review.offerId);
 
   const CardsListWrapped = withTransitHandler(CardsList);
 
@@ -119,11 +123,16 @@ const OfferPage = (props) => {
                 </div>
               </div>
 
+              <p className="debug-info"
+                style={({backgroundColor: `#ffffcc`})}
+              >
+                {currentOffer.city} &hellip; {currentOffer.id}
+              </p>
+
               <section className="property__reviews reviews">
 
                 <ReviewsList
-                  reviews={reviews}
-                  offerId={currentOffer.id}
+                  reviews={selectedReview}
                 />
 
                 <CommentForm />
@@ -134,7 +143,7 @@ const OfferPage = (props) => {
 
           <section className="property__map map">
             <Map
-              offers={offers}
+              offers={nearOffers}
               activeOfferId={activeOfferId}
               city={currentOffer.city}
             />
@@ -146,7 +155,7 @@ const OfferPage = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
             <CardsListWrapped
-              offers={offers}
+              offers={nearOffers}
               onEvent={onChangeActiveOffer}
               sitePage={SitePages.OFFER}
             />

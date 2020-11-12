@@ -1,6 +1,7 @@
 import {nanoid} from 'nanoid';
 import {MAX_RATING} from "../const";
 import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getDateWithinDecade} from "../utils";
+import getOffers from './offers';
 
 const REVIEWS_COUNT = 50;
 
@@ -26,7 +27,7 @@ const generateReview = ({offerId, cityName}) => {
 
 const generateReviews = (offers) => {
   const offersIds = offers.map((offer) => (
-    {offerId: offer.id, cityName: offer.city.name}
+    {offerId: offer.id, cityName: offer.city}
   ));
 
   return new Array(REVIEWS_COUNT)
@@ -36,4 +37,6 @@ const generateReviews = (offers) => {
     );
 };
 
-export default generateReviews;
+const reviews = generateReviews(getOffers());
+
+export default () => reviews;

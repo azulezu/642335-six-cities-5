@@ -1,17 +1,34 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {OfferPropTypes, CityPropTypes} from "../app/app-prop-types";
+import OfferPropTypes from "../offer-page/offer.prop";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {Styles, MapSetting} from "../../const";
+import cities from '../../mocks/cities';
+
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.city = this.props.city;
+    // props.city - строка с названием
+    // Map.city - объект с координатами и названием
+    this.city = cities.find((city) => city.name === this.props.city);
   }
 
   componentDidMount() {
+    this._initMap();
+    this._drawMarkers();
+  }
+
+  componentDidUpdate() {
+    this._drawMarkers();
+  }
+
+  componentWillUnmount() {
+    this._map = null;
+  }
+
+  _initMap() {
     this._map = leaflet.map(`map-container`, {
       center: this.city.location,
       zoom: MapSetting.ZOOM,
@@ -25,16 +42,6 @@ class Map extends PureComponent {
         attribution: MapSetting.ATTRIBUTION
       })
       .addTo(this._map);
-
-    this._drawMarkers();
-  }
-
-  componentDidUpdate() {
-    this._drawMarkers();
-  }
-
-  componentWillUnmount() {
-    this._map = null;
   }
 
   _drawMarkers() {
@@ -66,7 +73,7 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   activeOfferId: PropTypes.string,
-  city: CityPropTypes,
+  city: PropTypes.string.isRequired,
 };
 
 export default Map;

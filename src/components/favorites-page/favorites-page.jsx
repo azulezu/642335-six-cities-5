@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {OfferPropTypes} from "../app/app-prop-types";
+import OfferPropTypes from "../offer-page/offer.prop";
 import CardsList from "../cards-list/cards-list";
 import Header from "../header/header";
 import FavoritesContainer from "../favorites-container/favorites-container";
@@ -14,7 +14,7 @@ const FavoritesPage = (props) => {
     .filter((offer) => offer.isBookmarked);
 
   const getFilteredOffers = (cityName, offersList) => offersList
-    .filter((offer) => offer.city.name === cityName);
+    .filter((offer) => offer.city === cityName);
 
   return (
     <div className="page">

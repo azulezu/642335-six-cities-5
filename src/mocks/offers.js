@@ -69,14 +69,16 @@ const generateOffer = (city) => {
       userName: getRandomArrayItem(HOST_NAMES),
     },
     description: TEXT_CONTENTS,
-    city,
+    city: city.name,
     coords: getRandomCoords(city.location),
   };
 };
 
 const generateOffers = () =>
-  new Array(getRandomInteger(1, MAX_OFFERS_COUNT))
+  new Array(getRandomInteger(10, MAX_OFFERS_COUNT))
     .fill(``)
     .map(() => generateOffer(getRandomArrayItem(cities)));
 
-export default generateOffers;
+const offers = generateOffers();
+
+export default () => offers;
