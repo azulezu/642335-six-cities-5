@@ -14,7 +14,7 @@ import withTransitHandler from "../../hocs/with-transit-handler";
 
 const OfferPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
-  const {offer: currentOffer, offers: nearOffers, reviews} = props;
+  const {offer: currentOffer, nearOffers, reviews} = props;
 
   const selectedReview = reviews.slice()
     .filter((review) => currentOffer.id === review.offerId);
@@ -170,7 +170,7 @@ const OfferPage = (props) => {
 
 OfferPage.propTypes = {
   offer: OfferPropTypes.isRequired,
-  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  nearOffers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   reviews: PropTypes.arrayOf(ReviewPropTypes).isRequired,
   activeOfferId: PropTypes.string,
   onChangeActiveOffer: PropTypes.func.isRequired,

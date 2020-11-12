@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import OfferPropTypes from "../offer-page/offer.prop";
 import ReviewPropTypes from "../review/review.prop";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
@@ -9,17 +10,15 @@ import LoginPage from "../login-page/login-page";
 import OfferPage from "../offer-page/offer-page";
 
 const App = (props) => {
-  const {offers, reviews} = props;
+  const {city, offers, offersAll, reviewsAll} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <MainPage
-            offers={offers.filter((item) =>
-              item.city === offers[0].city
-            )}
-            city={offers[0].city}
+            offers={offers}
+            city={city}
           />
         </Route>
 
@@ -29,7 +28,7 @@ const App = (props) => {
 
         <Route exact path="/favorites">
           <FavoritesPage
-            offers={offers}
+            offers={offersAll}
           />
         </Route>
 
@@ -37,13 +36,10 @@ const App = (props) => {
           render={({match}) => (
             <OfferPage
               offer={offers.find((offer) => offer.id === match.params.id) || offers[0]}
-              reviews={reviews}
-              offers={offers.filter((item, index, array) =>
-                item.city === array[0].city
-              ).slice(1, 4)}
+              reviews={reviewsAll}
+              nearOffers={offers.slice(1, 4)}
             />
-          )
-          }
+          )}
         >
         </Route>
       </Switch>
@@ -52,8 +48,19 @@ const App = (props) => {
 };
 
 App.propTypes = {
+  city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
-  reviews: PropTypes.arrayOf(ReviewPropTypes).isRequired,
+  offersAll: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  reviewsAll: PropTypes.arrayOf(ReviewPropTypes).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: state.offers,
+  offersAll: state.offersAll,
+  reviewsAll: state.reviewsAll,
+});
+
+
+export {App};
+export default connect(mapStateToProps)(App);
