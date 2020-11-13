@@ -5,6 +5,7 @@ import getReviews from '../mocks/reviews';
 
 const offersAll = getOffers();
 const reviewsAll = getReviews();
+const DEFAULT_ORDER = SortOrders.POPULAR;
 
 const sort = (offersList, order) => {
   switch (order) {
@@ -26,7 +27,7 @@ const initialState = {
   reviewsAll,
   city: CitiesNames[0],
   offers: offersAll.filter((item) => item.city === CitiesNames[0]),
-  order: SortOrders.POPULAR,
+  order: DEFAULT_ORDER,
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,13 +37,23 @@ const reducer = (state = initialState, action) => {
         .filter((offer) => state.city === offer.city)});
 
     case ActionType.CHANGE_CITY:
-      return Object.assign({}, state, {city: action.payload, order: SortOrders.POPULAR});
-
-    case ActionType.SORT_OFFERS:
-      return Object.assign({}, state, {offers: sort(state.offers.slice(), state.order)});
+      return Object.assign({}, state, {
+        city: action.payload,
+        order: DEFAULT_ORDER
+      });
 
     case ActionType.CHANGE_ORDER:
-      return Object.assign({}, state, {order: action.payload});
+      if (action.payload === DEFAULT_ORDER) {
+        return Object.assign({}, state, {
+          order: action.payload,
+          offers: offersAll
+            .filter((offer) => state.city === offer.city),
+        });
+      }
+      return Object.assign({}, state, {
+        order: action.payload,
+        offers: sort(state.offers.slice(), action.payload),
+      });
 
     default: return state;
   }
