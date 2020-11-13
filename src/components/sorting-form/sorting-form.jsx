@@ -8,7 +8,6 @@ class SortingForm extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      order: SortOrders.POPULAR,
       isOpen: false,
     };
 
@@ -21,22 +20,25 @@ class SortingForm extends PureComponent {
   }
 
   handleSortOptionClick(evt) {
-    const {sortOffers, selectOffers} = this.props;
+    const {sortOffers, selectOffers, changeOrder} = this.props;
     const newOrder = evt.target.dataset.sort;
 
     this.setState({
       isOpen: false,
-      order: newOrder,
     });
+
+    changeOrder(newOrder);
+
     if (newOrder === SortOrders.POPULAR) {
       selectOffers();
       return;
     }
-    sortOffers(evt.target.dataset.sort);
+    sortOffers();
   }
 
   render() {
-    const {order, isOpen} = this.state;
+    const {isOpen} = this.state;
+    const {order} = this.props;
 
     const getSortOptionItem = (option) => {
       const activeOptionClassName = `places__option ${order === SortOrders[option]
@@ -79,11 +81,14 @@ class SortingForm extends PureComponent {
 }
 
 SortingForm.propTypes = {
+  order: PropTypes.string.isRequired,
   selectOffers: PropTypes.func.isRequired,
   sortOffers: PropTypes.func.isRequired,
+  changeOrder: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state) => ({
+  order: state.order,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -92,6 +97,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   sortOffers(order) {
     dispatch(ActionCreator.sortOffers(order));
+  },
+  changeOrder(order) {
+    dispatch(ActionCreator.changeOrder(order));
   },
 });
 

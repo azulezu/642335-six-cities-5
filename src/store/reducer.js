@@ -26,6 +26,7 @@ const initialState = {
   reviewsAll,
   city: CitiesNames[0],
   offers: offersAll.filter((item) => item.city === CitiesNames[0]),
+  order: SortOrders.POPULAR,
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,10 +36,13 @@ const reducer = (state = initialState, action) => {
         .filter((offer) => state.city === offer.city)});
 
     case ActionType.CHANGE_CITY:
-      return Object.assign({}, state, {city: action.payload});
+      return Object.assign({}, state, {city: action.payload, order: SortOrders.POPULAR});
 
     case ActionType.SORT_OFFERS:
-      return Object.assign({}, state, {offers: sort(state.offers.slice(), action.payload)});
+      return Object.assign({}, state, {offers: sort(state.offers.slice(), state.order)});
+
+    case ActionType.CHANGE_ORDER:
+      return Object.assign({}, state, {order: action.payload});
 
     default: return state;
   }
