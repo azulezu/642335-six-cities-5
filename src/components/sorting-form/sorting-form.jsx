@@ -1,4 +1,7 @@
 import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 import {SortOrders, SortOptionText} from "../../const";
 
 class SortingForm extends PureComponent {
@@ -18,10 +21,18 @@ class SortingForm extends PureComponent {
   }
 
   handleSortOptionClick(evt) {
+    const {sortOffers, selectOffers} = this.props;
+    const newOrder = evt.target.dataset.sort;
+
     this.setState({
       isOpen: false,
-      order: evt.target.dataset.sort,
+      order: newOrder,
     });
+    if (newOrder === SortOrders.POPULAR) {
+      selectOffers();
+      return;
+    }
+    sortOffers(evt.target.dataset.sort);
   }
 
   render() {
@@ -67,4 +78,22 @@ class SortingForm extends PureComponent {
   }
 }
 
-export default SortingForm;
+SortingForm.propTypes = {
+  selectOffers: PropTypes.func.isRequired,
+  sortOffers: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = () => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  selectOffers() {
+    dispatch(ActionCreator.selectOffers());
+  },
+  sortOffers(order) {
+    dispatch(ActionCreator.sortOffers(order));
+  },
+});
+
+export {SortingForm};
+export default connect(mapStateToProps, mapDispatchToProps)(SortingForm);

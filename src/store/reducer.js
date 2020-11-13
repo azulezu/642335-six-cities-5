@@ -1,10 +1,25 @@
 import {ActionType} from "./action";
-import {CitiesNames} from "../const";
+import {CitiesNames, SortOrders} from "../const";
 import getOffers from '../mocks/offers';
 import getReviews from '../mocks/reviews';
 
 const offersAll = getOffers();
 const reviewsAll = getReviews();
+
+const sort = (offersList, order) => {
+  switch (order) {
+    case SortOrders.PRICE_ASC:
+      return offersList.sort((a, b) => a.price - b.price);
+
+    case SortOrders.PRICE_DESC:
+      return offersList.sort((a, b) => b.price - a.price);
+
+    case SortOrders.RATING:
+      return offersList.sort((a, b) => b.rating - a.rating);
+
+    default: return offersList;
+  }
+};
 
 const initialState = {
   offersAll,
@@ -21,6 +36,9 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.CHANGE_CITY:
       return Object.assign({}, state, {city: action.payload});
+
+    case ActionType.SORT_OFFERS:
+      return Object.assign({}, state, {offers: sort(state.offers.slice(), action.payload)});
 
     default: return state;
   }
