@@ -1,6 +1,9 @@
 import {nanoid} from 'nanoid';
 import {MAX_RATING} from "../const";
 import {getRandomInteger, getRandomBoolean, getRandomArrayItem, getDateWithinDecade} from "../utils";
+import getOffers from './offers';
+
+const REVIEWS_COUNT = 50;
 
 const USER_NAMES = [`Max`, `Mohamed`, `Mary`, `Matthew`, `Marcus`];
 const TEXT_CONTENTS = [
@@ -8,24 +11,32 @@ const TEXT_CONTENTS = [
   `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
 ];
 
-const generateReview = () => {
+const generateReview = ({offerId, cityName}) => {
   const id = `id` + nanoid();
   const avatar = `img/avatar-${getRandomBoolean() ? `max` : `angelina`}.jpg`;
   return {
     id,
-    offerId: ``,
+    offerId,
     avatar,
     userName: getRandomArrayItem(USER_NAMES),
     rating: getRandomInteger(1, MAX_RATING),
-    text: getRandomArrayItem(TEXT_CONTENTS),
+    text: `From ${cityName}: ` + getRandomArrayItem(TEXT_CONTENTS),
     time: getDateWithinDecade(),
   };
 };
 
-const generateReviews = (count) => {
-  return new Array(count)
+const generateReviews = (offers) => {
+  const offersIds = offers.map((offer) => (
+    {offerId: offer.id, cityName: offer.city}
+  ));
+
+  return new Array(REVIEWS_COUNT)
     .fill(``)
-    .map(generateReview);
+    .map(() =>
+      generateReview(getRandomArrayItem(offersIds))
+    );
 };
 
-export default generateReviews;
+const reviews = generateReviews(getOffers());
+
+export default () => reviews;

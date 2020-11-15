@@ -1,5 +1,5 @@
 import React from "react";
-import {ReviewPropTypes} from "../app/app-prop-types";
+import ReviewPropTypes from "./review.prop";
 import {convertRatingToStyle} from "../../utils";
 
 const Review = (props) => {
@@ -27,6 +27,7 @@ const Review = (props) => {
         <p className="reviews__text">
           {review.text}
         </p>
+
         <time className="reviews__time" dateTime={review.time.toISOString().slice(0, 10)}>
           {new Intl.DateTimeFormat(`en-US`, {month: `long`}).format(review.time)} {review.time.getFullYear()}
         </time>

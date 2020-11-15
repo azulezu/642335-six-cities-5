@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {OfferPropTypes, ReviewPropTypes} from "../app/app-prop-types";
+import {connect} from "react-redux";
+import OfferPropTypes from "./offer.prop";
+import ReviewPropTypes from "../review/review.prop";
 import {convertRatingToStyle} from "../../utils";
 import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
@@ -8,12 +10,15 @@ import CardsList from "../cards-list/cards-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import {SitePages} from "../../const";
+import {selectReviewsByOffer} from "../../core";
 import withMapMarkers from "../../hocs/with-map-markers";
 import withTransitHandler from "../../hocs/with-transit-handler";
+import withToggleBookmark from "../../hocs/with-toggle-bookmark";
 
 const OfferPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
-  const {offer: currentOffer, offers, reviews} = props;
+  const {onBookmarkClick} = props;
+  const {offer: currentOffer, nearOffers, reviews} = props;
 
   const CardsListWrapped = withTransitHandler(CardsList);
 
@@ -51,6 +56,7 @@ const OfferPage = (props) => {
                 <button
                   className={`property__bookmark-button button ${currentOffer.isBookmarked ? ` property__bookmark-button--active` : ``}`}
                   type="button"
+                  onClick={onBookmarkClick}
                 >
                   <svg className="place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
@@ -120,9 +126,10 @@ const OfferPage = (props) => {
               </div>
 
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
 
-                <ReviewsList reviews={reviews} />
+                <ReviewsList
+                  reviews={reviews}
+                />
 
                 <CommentForm />
 
@@ -132,8 +139,9 @@ const OfferPage = (props) => {
 
           <section className="property__map map">
             <Map
-              offers={offers}
+              offers={nearOffers}
               activeOfferId={activeOfferId}
+              city={currentOffer.city}
             />
           </section>
         </section>
@@ -143,7 +151,7 @@ const OfferPage = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
             <CardsListWrapped
-              offers={offers}
+              offers={nearOffers}
               onEvent={onChangeActiveOffer}
               sitePage={SitePages.OFFER}
             />
@@ -158,10 +166,19 @@ const OfferPage = (props) => {
 
 OfferPage.propTypes = {
   offer: OfferPropTypes.isRequired,
-  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  nearOffers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   reviews: PropTypes.arrayOf(ReviewPropTypes).isRequired,
   activeOfferId: PropTypes.string,
   onChangeActiveOffer: PropTypes.func.isRequired,
+  onBookmarkClick: PropTypes.func.isRequired,
 };
 
-export default withMapMarkers(OfferPage);
+const wrappedOfferPage = withToggleBookmark(withMapMarkers(OfferPage));
+
+const mapStateToProps = (state) => ({
+  reviews: selectReviewsByOffer(state.offer, state.reviews),
+  offer: state.offer,
+});
+
+export {wrappedOfferPage};
+export default connect(mapStateToProps)(wrappedOfferPage);

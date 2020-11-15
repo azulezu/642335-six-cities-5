@@ -1,12 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {OfferPropTypes} from "../app/app-prop-types";
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import OfferPropTypes from "../offer-page/offer.prop";
 import CardsList from "../cards-list/cards-list";
 import Header from "../header/header";
-import {SitePages} from "../../const";
+import FavoritesContainer from "../favorites-container/favorites-container";
+import {SitePages, CitiesNames} from "../../const";
+import {selectBookmarkedOffers, selectOffersByCities} from "../../core";
 
 const FavoritesPage = (props) => {
-  const {offers} = props;
+  const {offersByCities} = props;
 
   return (
     <div className="page">
@@ -18,49 +22,48 @@ const FavoritesPage = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <CardsList
-                  offers={offers.slice(0, 2)}
-                  sitePage={SitePages.FAVORITES}
-                />
-              </li>
-
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Cologne</span>
-                    </a>
-                  </div>
-                </div>
-                <CardsList
-                  offers={offers.slice(0, 1)}
-                  sitePage={SitePages.FAVORITES}
-                />
-              </li>
+              {
+                CitiesNames.map((cityName) => {
+                  return offersByCities[cityName].length > 0 && (
+                    <FavoritesContainer
+                      key={cityName}
+                      city={cityName}
+                    >
+                      <CardsList
+                        offers={offersByCities[cityName]}
+                        sitePage={SitePages.FAVORITES}
+                      />
+                    </FavoritesContainer>
+                  );
+                })
+              }
             </ul>
+
           </section>
         </div>
       </main>
 
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link"
+          to={`/`}
+        >
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        </Link>
       </footer>
     </div>
   );
 };
 
 FavoritesPage.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  offersByCities: PropTypes.objectOf(
+      PropTypes.arrayOf(OfferPropTypes)
+  ).isRequired,
 };
 
-export default FavoritesPage;
+const mapStateToProps = (state) => ({
+  offersByCities: selectOffersByCities(
+      selectBookmarkedOffers(state.offers)),
+});
+
+export {FavoritesPage};
+export default connect(mapStateToProps)(FavoritesPage);

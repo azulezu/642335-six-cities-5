@@ -11,6 +11,7 @@ export const Styles = {
 };
 
 export const MAX_RATING = 5;
+export const MAX_DISPLAYED_REVIEWS = 10;
 
 export const MapSetting = {
   CITY: [52.38333, 4.9],
@@ -52,3 +53,28 @@ export const CardImageSizes = {
     height: `110`
   },
 };
+
+export const CitiesNames = [
+  `Paris`,
+  `Cologne`,
+  `Brussels`,
+  `Amsterdam`,
+  `Hamburg`,
+  `Dusseldorf`
+];
+
+export const SortOrders = {
+  POPULAR: `POPULAR`,
+  PRICE_ASC: `PRICE_ASC`,
+  PRICE_DESC: `PRICE_DESC`,
+  RATING: `RATING`,
+};
+
+export const SortOptionText = {
+  POPULAR: `Popular`,
+  PRICE_ASC: `Price: low to high`,
+  PRICE_DESC: `Price: high to low`,
+  RATING: `Top rated first`,
+};
+
+export const DEFAULT_ORDER = SortOrders.POPULAR;

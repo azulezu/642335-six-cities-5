@@ -1,36 +1,53 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {OfferPropTypes} from "../app/app-prop-types";
+import OfferPropTypes from "../offer-page/offer.prop";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {Styles, MapSetting} from "../../const";
+import cities from '../../mocks/cities';
+
 
 class Map extends PureComponent {
+  constructor(props) {
+    super(props);
+    // props.city - строка с названием
+    // Map.city - объект {name: `city`, location: [latitude, longitude]}
+    this.city = cities.find((city) => city.name === this.props.city);
+  }
 
   componentDidMount() {
+    this._initMap();
+    this._drawMarkers();
+  }
+
+  componentDidUpdate() {
+    if (this.city && this.city.name !== this.props.city) {
+      this.city = cities.find((city) => city.name === this.props.city);
+      this._map.remove();
+      this._initMap();
+    }
+    this._drawMarkers();
+  }
+
+  componentWillUnmount() {
+    this._map.remove();
+    this._map = null;
+  }
+
+  _initMap() {
     this._map = leaflet.map(`map-container`, {
-      center: MapSetting.CITY,
+      center: this.city.location,
       zoom: MapSetting.ZOOM,
       zoomControl: MapSetting.ZOOM_CONTROL,
       marker: true,
     });
 
-    this._map.setView(MapSetting.CITY, MapSetting.ZOOM);
+    this._map.setView(this.city.location, MapSetting.ZOOM);
     leaflet
       .tileLayer(MapSetting.TILE_LAYER, {
         attribution: MapSetting.ATTRIBUTION
       })
       .addTo(this._map);
-
-    this._drawMarkers();
-  }
-
-  componentDidUpdate() {
-    this._drawMarkers();
-  }
-
-  componentWillUnmount() {
-    this._map = null;
   }
 
   _drawMarkers() {
@@ -62,6 +79,7 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   activeOfferId: PropTypes.string,
+  city: PropTypes.string.isRequired,
 };
 
 export default Map;
