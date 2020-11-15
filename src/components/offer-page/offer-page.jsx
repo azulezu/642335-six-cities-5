@@ -13,9 +13,11 @@ import {SitePages} from "../../const";
 import {selectReviewsByOffer} from "../../core";
 import withMapMarkers from "../../hocs/with-map-markers";
 import withTransitHandler from "../../hocs/with-transit-handler";
+import withToggleBookmark from "../../hocs/with-toggle-bookmark";
 
 const OfferPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
+  const {onBookmarkClick} = props;
   const {offer: currentOffer, nearOffers, reviews} = props;
 
   const CardsListWrapped = withTransitHandler(CardsList);
@@ -54,6 +56,7 @@ const OfferPage = (props) => {
                 <button
                   className={`property__bookmark-button button ${currentOffer.isBookmarked ? ` property__bookmark-button--active` : ``}`}
                   type="button"
+                  onClick={onBookmarkClick}
                 >
                   <svg className="place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
@@ -173,9 +176,10 @@ OfferPage.propTypes = {
   reviews: PropTypes.arrayOf(ReviewPropTypes).isRequired,
   activeOfferId: PropTypes.string,
   onChangeActiveOffer: PropTypes.func.isRequired,
+  onBookmarkClick: PropTypes.func.isRequired,
 };
 
-const wrappedOfferPage = withMapMarkers(OfferPage);
+const wrappedOfferPage = withToggleBookmark(withMapMarkers(OfferPage));
 
 const mapStateToProps = (state) => ({
   reviews: selectReviewsByOffer(state.offer, state.reviews),
