@@ -9,22 +9,19 @@ const withToggleBookmark = (Component) => {
   class ToggleBookmark extends PureComponent {
     constructor(props) {
       super(props);
-      this._BookmarkHandler = this._BookmarkHandler.bind(this);
-      this._toggleBookmark = props.toggleBookmark;
+      this.handlerBookmarkClick = this.handlerBookmarkClick.bind(this);
+      this.toggleBookmark = props.toggleBookmark;
 
-      ToggleBookmark.propTypes = {
-        toggleBookmark: PropTypes.func,
-      };
     }
 
-    _BookmarkHandler() {
-      this._toggleBookmark(this.props.offer);
+    handlerBookmarkClick() {
+      this.toggleBookmark(this.props.offer);
     }
 
     render() {
       return <Component
         {...this.props}
-        onBookmarkClick={this._BookmarkHandler}
+        onBookmarkClick={this.handlerBookmarkClick}
       />;
     }
   }
@@ -40,9 +37,7 @@ const withToggleBookmark = (Component) => {
     },
   });
 
-  const extendedToggleBookmark = connect(null, mapDispatchToProps)(ToggleBookmark);
-
-  return extendedToggleBookmark;
+  return connect(null, mapDispatchToProps)(ToggleBookmark);
 };
 
 export default withToggleBookmark;
