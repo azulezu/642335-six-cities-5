@@ -28,10 +28,6 @@ const Review = (props) => {
           {review.text}
         </p>
 
-        <p className="debug-info"
-          style={({backgroundColor: `#ffffcc`})}
-        >{review.offerId}</p>
-
         <time className="reviews__time" dateTime={review.time.toISOString().slice(0, 10)}>
           {new Intl.DateTimeFormat(`en-US`, {month: `long`}).format(review.time)} {review.time.getFullYear()}
         </time>

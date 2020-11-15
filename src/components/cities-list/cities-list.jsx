@@ -1,35 +1,46 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import {CitiesNames} from "../../const";
 
-const CitiesList = (props) => {
-  const {city, changeCity} = props;
 
-  const onCityTabClick = (evt) => {
+class CitiesList extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._handleCityTabClick = this._handleCityTabClick.bind(this);
+  }
+
+  _handleCityTabClick(evt) {
     evt.preventDefault();
-    changeCity(evt.target.textContent);
-  };
+    this.props.changeCity(evt.target.textContent);
+  }
 
-  return (
-    <ul className="locations__list tabs__list">
-      {CitiesNames.map((cityName) =>
-        <li className="locations__item"
-          key={cityName}
-        >
-          <a className={`locations__item-link tabs__item ${cityName === city
-            ? `tabs__item--active` : ``}`}
-          onClick={onCityTabClick}
-          href="#"
+
+  render() {
+    const {city} = this.props;
+
+    return (
+      <ul className="locations__list tabs__list">
+        {CitiesNames.map((cityName) =>
+          <li className="locations__item"
+            key={cityName}
           >
-            <span>{cityName}</span>
-          </a>
-        </li>
-      )}
-    </ul>
-  );
-};
+            <a className={`locations__item-link tabs__item ${cityName === city
+              ? `tabs__item--active` : ``}`}
+            onClick={this._handleCityTabClick}
+            href="#"
+            >
+              <span>{cityName}</span>
+            </a>
+          </li>
+        )}
+      </ul>
+    );
+  }
+}
+
 
 CitiesList.propTypes = {
   city: PropTypes.string.isRequired,

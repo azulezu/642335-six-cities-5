@@ -82,10 +82,6 @@ const Card = (props) => {
         </h2>
         <p className="place-card__type">{PlaceTypes[offer.type]}</p>
 
-        <p className="debug-info"
-          style={({backgroundColor: `#ffffcc`})}
-        >{offer.city}</p>
-
       </div>
     </article>
   );

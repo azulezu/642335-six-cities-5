@@ -125,12 +125,6 @@ const OfferPage = (props) => {
                 </div>
               </div>
 
-              <p className="debug-info"
-                style={({backgroundColor: `#ffffcc`})}
-              >
-                {currentOffer.city} &hellip; {currentOffer.id}
-              </p>
-
               <section className="property__reviews reviews">
 
                 <ReviewsList
