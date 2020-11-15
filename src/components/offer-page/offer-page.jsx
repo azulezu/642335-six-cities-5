@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import OfferPropTypes from "./offer.prop";
 import ReviewPropTypes from "../review/review.prop";
 import {convertRatingToStyle} from "../../utils";
@@ -9,15 +10,13 @@ import CardsList from "../cards-list/cards-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import {SitePages} from "../../const";
+import {selectReviewsByOffer} from "../../core";
 import withMapMarkers from "../../hocs/with-map-markers";
 import withTransitHandler from "../../hocs/with-transit-handler";
 
 const OfferPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
   const {offer: currentOffer, nearOffers, reviews} = props;
-
-  const selectedReview = reviews.slice()
-    .filter((review) => currentOffer.id === review.offerId);
 
   const CardsListWrapped = withTransitHandler(CardsList);
 
@@ -132,7 +131,7 @@ const OfferPage = (props) => {
               <section className="property__reviews reviews">
 
                 <ReviewsList
-                  reviews={selectedReview}
+                  reviews={reviews}
                 />
 
                 <CommentForm />
@@ -176,4 +175,12 @@ OfferPage.propTypes = {
   onChangeActiveOffer: PropTypes.func.isRequired,
 };
 
-export default withMapMarkers(OfferPage);
+const wrappedOfferPage = withMapMarkers(OfferPage);
+
+const mapStateToProps = (state) => ({
+  reviews: selectReviewsByOffer(state.offer, state.reviews),
+  offer: state.offer,
+});
+
+export {wrappedOfferPage};
+export default connect(mapStateToProps)(wrappedOfferPage);

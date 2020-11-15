@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import OfferPropTypes from "../offer-page/offer.prop";
 import IconsSprite from "../icons-sprite/icons-sprite";
 import CardsList from "../cards-list/cards-list";
@@ -8,6 +9,7 @@ import Header from "../header/header";
 import CitiesList from "../cities-list/cities-list";
 import SortingForm from "../sorting-form/sorting-form";
 import {SitePages} from "../../const";
+import {selectOffersByCity} from "../../core";
 import withMapMarkers from "../../hocs/with-map-markers";
 import withTransitHandler from "../../hocs/with-transit-handler";
 
@@ -39,6 +41,7 @@ const MainPage = (props) => {
 
           <div className="cities">
             <div className="cities__places-container container">
+
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offers.length} places to stay in {city}</b>
@@ -78,4 +81,12 @@ MainPage.propTypes = {
   city: PropTypes.string.isRequired,
 };
 
-export default withMapMarkers(MainPage);
+const wrappedMainPage = withMapMarkers(MainPage);
+
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: selectOffersByCity(state.city, state.offers),
+});
+
+export {wrappedMainPage};
+export default connect(mapStateToProps)(wrappedMainPage);

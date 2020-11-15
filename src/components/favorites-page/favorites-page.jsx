@@ -1,20 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 import OfferPropTypes from "../offer-page/offer.prop";
 import CardsList from "../cards-list/cards-list";
 import Header from "../header/header";
 import FavoritesContainer from "../favorites-container/favorites-container";
 import {SitePages, CitiesNames} from "../../const";
+import {selectBookmarkedOffers, selectOffersByCities} from "../../core";
 
 const FavoritesPage = (props) => {
-  const {offers} = props;
-
-  const getFavoritesOffers = (offersList) => offersList
-    .filter((offer) => offer.isBookmarked);
-
-  const getFilteredOffers = (cityName, offersList) => offersList
-    .filter((offer) => offer.city === cityName);
+  const {offersByCities} = props;
 
   return (
     <div className="page">
@@ -28,18 +24,13 @@ const FavoritesPage = (props) => {
             <ul className="favorites__list">
               {
                 CitiesNames.map((cityName) => {
-                  const filteredOffers = getFilteredOffers(cityName, getFavoritesOffers(offers));
-
-                  if (!filteredOffers.length) {
-                    return ``;
-                  }
-                  return (
+                  return offersByCities[cityName].length > 0 && (
                     <FavoritesContainer
                       key={cityName}
                       city={cityName}
                     >
                       <CardsList
-                        offers={filteredOffers}
+                        offers={offersByCities[cityName]}
                         sitePage={SitePages.FAVORITES}
                       />
                     </FavoritesContainer>
@@ -47,6 +38,7 @@ const FavoritesPage = (props) => {
                 })
               }
             </ul>
+
           </section>
         </div>
       </main>
@@ -63,7 +55,15 @@ const FavoritesPage = (props) => {
 };
 
 FavoritesPage.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  offersByCities: PropTypes.objectOf(
+      PropTypes.arrayOf(OfferPropTypes)
+  ).isRequired,
 };
 
-export default FavoritesPage;
+const mapStateToProps = (state) => ({
+  offersByCities: selectOffersByCities(
+      selectBookmarkedOffers(state.offers)),
+});
+
+export {FavoritesPage};
+export default connect(mapStateToProps)(FavoritesPage);

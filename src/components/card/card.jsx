@@ -1,6 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 import OfferPropTypes from "../offer-page/offer.prop";
 import {convertRatingToStyle} from "../../utils";
 import {PlaceTypes, CardImageSizes} from "../../const";
@@ -22,8 +24,12 @@ const getImageClassName = (modificator) =>
 
 
 const Card = (props) => {
-  const {offer, modificator} = props;
+  const {offer, modificator, toggleBookmark} = props;
   const {onEvent} = props;
+
+  const onBookmarkButtonClick = () => {
+    toggleBookmark(offer);
+  };
 
   return (
     <article
@@ -55,6 +61,7 @@ const Card = (props) => {
           <button
             className={`place-card__bookmark-button button ${offer.isBookmarked ? ` place-card__bookmark-button--active` : ``}`}
             type="button"
+            onClick={onBookmarkButtonClick}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -88,11 +95,18 @@ const Card = (props) => {
   );
 };
 
-
 Card.propTypes = {
   onEvent: PropTypes.func,
   offer: OfferPropTypes.isRequired,
   modificator: PropTypes.string,
+  toggleBookmark: PropTypes.func.isRequired,
 };
 
-export default Card;
+const mapDispatchToProps = (dispatch) => ({
+  toggleBookmark(offer) {
+    dispatch(ActionCreator.toggleBookmark(offer));
+  },
+});
+
+export {Card};
+export default connect(null, mapDispatchToProps)(Card);

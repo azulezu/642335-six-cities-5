@@ -76,3 +76,5 @@ export const SortOptionText = {
   PRICE_DESC: `Price: high to low`,
   RATING: `Top rated first`,
 };
+
+export const DEFAULT_ORDER = SortOrders.POPULAR;

@@ -4,12 +4,11 @@ import ReviewPropTypes from "../review/review.prop";
 import Review from "../review/review";
 import {MAX_DISPLAYED_REVIEWS} from "../../const";
 
+const getSortedReviews = (reviewsList) =>
+  reviewsList.slice().sort((a, b) => b.time - a.time);
 
 const ReviewsList = (props) => {
   const {reviews} = props;
-
-  const getSortedReviews = (reviewsList) =>
-    reviewsList.sort((a, b) => b.time - a.time);
 
   return (
     <React.Fragment>

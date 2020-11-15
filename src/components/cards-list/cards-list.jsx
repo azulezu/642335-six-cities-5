@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import OfferPropTypes from "../offer-page/offer.prop";
 import Card from "../card/card";
 import {SitePages, CardModificators} from "../../const";
+import {sort} from "../../core";
 
 const CardsList = (props) => {
-  const {offers, sitePage} = props;
+  const {offers, sitePage, order} = props;
 
   const getCardFormat = (page) => {
     switch (page) {
@@ -35,7 +37,7 @@ const CardsList = (props) => {
 
   return (
     <div className={getContainerClassName(sitePage)}>
-      {offers.map((offer) =>
+      {sort(offers, order).map((offer) =>
         <Card
           key={offer.id}
           offer={offer}
@@ -50,6 +52,12 @@ const CardsList = (props) => {
 CardsList.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   sitePage: PropTypes.string.isRequired,
+  order: PropTypes.string,
 };
 
-export default CardsList;
+const mapStateToProps = (state) => ({
+  order: state.order,
+});
+
+export {CardsList};
+export default connect(mapStateToProps)(CardsList);

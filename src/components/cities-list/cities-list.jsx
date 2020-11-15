@@ -5,18 +5,12 @@ import {ActionCreator} from "../../store/action";
 import {CitiesNames} from "../../const";
 
 const CitiesList = (props) => {
-  const {city, changeCity, selectOffers} = props;
+  const {city, changeCity} = props;
 
   const onCityTabClick = (evt) => {
     evt.preventDefault();
-    changeCity(evt.currentTarget.dataset.city);
-    selectOffers();
+    changeCity(evt.target.textContent);
   };
-
-  const getTabsItemClassName = (currentCity) => (
-    `locations__item-link tabs__item ${currentCity === city
-      ? `tabs__item--active` : ``}`
-  );
 
   return (
     <ul className="locations__list tabs__list">
@@ -24,10 +18,10 @@ const CitiesList = (props) => {
         <li className="locations__item"
           key={cityName}
         >
-          <a className={getTabsItemClassName(cityName)}
-            onClick={onCityTabClick}
-            data-city={cityName}
-            href="#"
+          <a className={`locations__item-link tabs__item ${cityName === city
+            ? `tabs__item--active` : ``}`}
+          onClick={onCityTabClick}
+          href="#"
           >
             <span>{cityName}</span>
           </a>
@@ -40,20 +34,13 @@ const CitiesList = (props) => {
 CitiesList.propTypes = {
   city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
-  selectOffers: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = () => ({
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  selectOffers() {
-    dispatch(ActionCreator.selectOffers());
-  },
   changeCity(cityName) {
     dispatch(ActionCreator.changeCity(cityName));
   },
 });
 
 export {CitiesList};
-export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
+export default connect(null, mapDispatchToProps)(CitiesList);
