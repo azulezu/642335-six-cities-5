@@ -10,6 +10,7 @@ const initialState = {
   offer: null,
   city: CitiesNames[0],
   order: DEFAULT_ORDER,
+  email: ``,
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +37,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.TOGGLE_BOOKMARK:
       return Object.assign({}, state, {
         offers: updateOfferBookmark(action.payload, state.offers),
+      });
+
+    case ActionType.SIGN_IN:
+      return Object.assign({}, state, {
+        email: action.payload,
       });
 
     default: return state;

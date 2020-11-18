@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const FavoritesContainer = (props) => {
   const {city} = props;
@@ -8,9 +9,11 @@ const FavoritesContainer = (props) => {
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link className="locations__item-link"
+            to={`/`}
+          >
             <span>{city}</span>
-          </a>
+          </Link>
         </div>
       </div>
       {props.children}
