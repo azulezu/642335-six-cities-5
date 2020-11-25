@@ -10,7 +10,7 @@ class LoginForm extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      email: this.props.email,
+      email: ``,
       password: ``,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,7 +19,6 @@ class LoginForm extends PureComponent {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    // this.props.signIn(new FormData(evt.target).get(`email`));
     if (this.isLoginValide()) {
       this.props.signIn(this.state.email);
     }
@@ -70,13 +69,8 @@ class LoginForm extends PureComponent {
 }
 
 LoginForm.propTypes = {
-  email: PropTypes.string.isRequired,
   signIn: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  email: state.email,
-});
 
 const mapDispatchToProps = (dispatch) => ({
   signIn(email) {
@@ -85,4 +79,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {LoginForm};
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(null, mapDispatchToProps)(LoginForm);

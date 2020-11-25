@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 const Header = (props) => {
-  const {email} = props;
+  const {email, isAuthorized} = props;
   return (
     <header className="header">
       <div className="container">
@@ -21,7 +21,7 @@ const Header = (props) => {
             <ul className="header__nav-list">
               <li className="header__nav-item user">
                 <Link className="header__nav-link header__nav-link--profile"
-                  to={email ? `/favorites` : `/login`}
+                  to={isAuthorized ? `/favorites` : `/login`}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
@@ -43,10 +43,12 @@ const Header = (props) => {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   email: state.email,
+  isAuthorized: state.isAuthorized,
 });
 
 export {Header};

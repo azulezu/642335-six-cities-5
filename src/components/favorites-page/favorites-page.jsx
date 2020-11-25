@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import OfferPropTypes from "../offer-page/offer.prop";
 import CardsList from "../cards-list/cards-list";
@@ -10,7 +10,11 @@ import {SitePages, CitiesNames} from "../../const";
 import {selectBookmarkedOffers, selectOffersByCities} from "../../core";
 
 const FavoritesPage = (props) => {
-  const {offersByCities} = props;
+  const {offersByCities, isAuthorized} = props;
+
+  if (!isAuthorized) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div className="page">
@@ -58,11 +62,13 @@ FavoritesPage.propTypes = {
   offersByCities: PropTypes.objectOf(
       PropTypes.arrayOf(OfferPropTypes)
   ).isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offersByCities: selectOffersByCities(
       selectBookmarkedOffers(state.offers)),
+  isAuthorized: state.isAuthorized,
 });
 
 export {FavoritesPage};

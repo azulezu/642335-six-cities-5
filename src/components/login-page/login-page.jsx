@@ -1,16 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import Header from "../header/header";
-// import LoginForm from "../login-form/login-form.controlled-form";
 // import withState from "../../hocs/withSubmit";
 // const wrappedLoginForm = withState(LoginForm);
 
-import LoginForm from "../login-form/login-form.incontrolled-form";
+import LoginForm from "../login-form/login-form";
 
 const LoginPage = (props) => {
-  const {city} = props;
+  const {city, isAuthorized} = props;
+
+  if (isAuthorized) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="page page--gray page--login">
@@ -42,10 +45,12 @@ const LoginPage = (props) => {
 
 LoginPage.propTypes = {
   city: PropTypes.string.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
+  isAuthorized: state.isAuthorized,
 });
 
 export {LoginPage};

@@ -11,13 +11,14 @@ const initialState = {
   city: CitiesNames[0],
   order: DEFAULT_ORDER,
   email: ``,
+  isAuthorized: false,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return Object.assign({}, state, {
-        activeOffer: null,
+        offer: null,
         city: action.payload,
         order: DEFAULT_ORDER,
       });
@@ -42,6 +43,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.SIGN_IN:
       return Object.assign({}, state, {
         email: action.payload,
+        isAuthorized: true,
       });
 
     default: return state;
