@@ -2,14 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 import Header from "../header/header";
-// import withState from "../../hocs/withSubmit";
-// const wrappedLoginForm = withState(LoginForm);
-
 import LoginForm from "../login-form/login-form";
+import {PASSWORD_MIN_LENGTH, REGEXP_EMAIL} from "../../const";
+
+const validate = ({email = ``, password = ``}) => {
+  return (password.length > PASSWORD_MIN_LENGTH && REGEXP_EMAIL.test(email)) ? ``
+    : `Форма заполнена неверно`;
+};
 
 const LoginPage = (props) => {
-  const {city, isAuthorized} = props;
+  const {city, isAuthorized, signIn} = props;
 
   if (isAuthorized) {
     return <Redirect to="/" />;
@@ -24,7 +28,10 @@ const LoginPage = (props) => {
           <section className="login">
             <h1 className="login__title">Sign in</h1>
 
-            <LoginForm />
+            <LoginForm
+              submitAction = {signIn}
+              validateForm = {validate}
+            />
 
           </section>
 
@@ -46,7 +53,14 @@ const LoginPage = (props) => {
 LoginPage.propTypes = {
   city: PropTypes.string.isRequired,
   isAuthorized: PropTypes.bool.isRequired,
+  signIn: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  signIn({email = ``}) {
+    dispatch(ActionCreator.signIn(email));
+  },
+});
 
 const mapStateToProps = (state) => ({
   city: state.city,
@@ -54,4 +68,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {LoginPage};
-export default connect(mapStateToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

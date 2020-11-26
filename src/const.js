@@ -12,6 +12,8 @@ export const Styles = {
 
 export const MAX_RATING = 5;
 export const MAX_DISPLAYED_REVIEWS = 10;
+export const PASSWORD_MIN_LENGTH = 0;
+export const REGEXP_EMAIL = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
 
 export const MapSetting = {
   CITY: [52.38333, 4.9],
