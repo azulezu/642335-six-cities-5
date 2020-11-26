@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import OfferPropTypes from "../offer-page/offer.prop";
 import CardsList from "../cards-list/cards-list";
 import Header from "../header/header";
+import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import FavoritesContainer from "../favorites-container/favorites-container";
 import {SitePages, CitiesNames} from "../../const";
 import {selectBookmarkedOffers, selectOffersByCities} from "../../core";
@@ -16,34 +17,44 @@ const FavoritesPage = (props) => {
     return <Redirect to="/login" />;
   }
 
+  const isEmpty = Object.values(offersByCities)
+    .every((offersByCity) => offersByCity.length === 0);
+
+  const pageClassName = `page ${!isEmpty ? `` : `page--favorites-empty`}`;
+  const mainClassName = `page__main page__main--favorites ${!isEmpty ? ``
+    : `page__main--favorites-empty`}`;
+
   return (
-    <div className="page">
+    <div className={pageClassName}>
 
       <Header />
 
-      <main className="page__main page__main--favorites">
+      <main className={mainClassName}>
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {
-                CitiesNames.map((cityName) => {
-                  return offersByCities[cityName].length > 0 && (
-                    <FavoritesContainer
-                      key={cityName}
-                      city={cityName}
-                    >
-                      <CardsList
-                        offers={offersByCities[cityName]}
-                        sitePage={SitePages.FAVORITES}
-                      />
-                    </FavoritesContainer>
-                  );
-                })
-              }
-            </ul>
-
-          </section>
+          {isEmpty ? <FavoritesEmpty />
+            : (
+              <section className="favorites">
+                <h1 className="favorites__title">Saved listing</h1>
+                <ul className="favorites__list">
+                  {
+                    CitiesNames.map((cityName) => {
+                      return offersByCities[cityName].length > 0 && (
+                        <FavoritesContainer
+                          key={cityName}
+                          city={cityName}
+                        >
+                          <CardsList
+                            offers={offersByCities[cityName]}
+                            sitePage={SitePages.FAVORITES}
+                          />
+                        </FavoritesContainer>
+                      );
+                    })
+                  }
+                </ul>
+              </section>
+            )
+          }
         </div>
       </main>
 
