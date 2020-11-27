@@ -3,34 +3,24 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import {SortOrders, SortOptionText} from "../../const";
+import withToggleStatus from "../../hocs/with-toggle-status";
 
 class SortingForm extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-    };
-
-    this.handleSortCaptionClick = this.handleSortCaptionClick.bind(this);
     this.handleSortOptionClick = this.handleSortOptionClick.bind(this);
   }
 
-  handleSortCaptionClick() {
-    this.setState((state) => ({isOpen: !state.isOpen}));
-  }
-
   handleSortOptionClick(evt) {
-    const {changeOrder} = this.props;
+    const {changeOrder, onStatusToggleClick} = this.props;
 
-    this.setState({
-      isOpen: false,
-    });
-
+    onStatusToggleClick();
     changeOrder(evt.target.dataset.sort);
   }
 
   render() {
-    const {isOpen} = this.state;
+    const onSortCaptionClick = this.props.onStatusToggleClick;
+    const isOpen = this.props.status;
     const {order} = this.props;
 
     const getSortOptionItem = (option) => {
@@ -54,7 +44,7 @@ class SortingForm extends PureComponent {
         <span className="places__sorting-caption">Sort by </span>
 
         <span className="places__sorting-type"
-          onClick={this.handleSortCaptionClick}
+          onClick={onSortCaptionClick}
           tabIndex="0"
         >
           {SortOptionText[order]}
@@ -76,6 +66,8 @@ class SortingForm extends PureComponent {
 SortingForm.propTypes = {
   order: PropTypes.string.isRequired,
   changeOrder: PropTypes.func.isRequired,
+  status: PropTypes.bool.isRequired,
+  onStatusToggleClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -88,5 +80,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {SortingForm};
-export default connect(mapStateToProps, mapDispatchToProps)(SortingForm);
+const SortingFormWrapped = withToggleStatus(SortingForm);
+
+export {SortingFormWrapped};
+export default connect(mapStateToProps, mapDispatchToProps)(SortingFormWrapped);
