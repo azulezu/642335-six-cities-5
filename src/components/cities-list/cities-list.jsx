@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import {CitiesNames} from "../../const";
@@ -27,13 +28,14 @@ class CitiesList extends PureComponent {
           <li className="locations__item"
             key={cityName}
           >
-            <a className={`locations__item-link tabs__item ${cityName === city
-              ? `tabs__item--active` : ``}`}
-            onClick={this._handleCityTabClick}
-            href="#"
+            <Link
+              className={`locations__item-link tabs__item ${cityName === city
+                ? `tabs__item--active` : ``}`}
+              onClick={this._handleCityTabClick}
+              to={`/`}
             >
               <span>{cityName}</span>
-            </a>
+            </Link>
           </li>
         )}
       </ul>

@@ -3,9 +3,8 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import OfferPropTypes from "../offer-page/offer.prop";
 import {convertRatingToStyle} from "../../utils";
-import {PlaceTypes, CardImageSizes} from "../../const";
-import {CardModificators} from "../../const";
-import withToggleBookmark from "../../hocs/with-toggle-bookmark";
+import {PlaceTypes, CardImageSizes, CardModificators} from "../../const";
+import Bookmark from "../bookmark/bookmark";
 
 const getArticleClassName = (modificator) => {
   switch (modificator) {
@@ -25,7 +24,6 @@ const getImageClassName = (modificator) =>
 const Card = (props) => {
   const {offer, modificator} = props;
   const {onEvent} = props;
-  const {onBookmarkClick} = props;
 
   return (
     <article
@@ -54,16 +52,11 @@ const Card = (props) => {
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={`place-card__bookmark-button button ${offer.isBookmarked ? ` place-card__bookmark-button--active` : ``}`}
-            type="button"
-            onClick={onBookmarkClick}
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+
+          <Bookmark
+            offer={offer}
+          />
+
         </div>
 
         <div className="place-card__rating rating">
@@ -91,8 +84,6 @@ Card.propTypes = {
   onEvent: PropTypes.func,
   offer: OfferPropTypes.isRequired,
   modificator: PropTypes.string,
-  onBookmarkClick: PropTypes.func.isRequired,
 };
 
-const CardWrapped = withToggleBookmark(Card);
-export default CardWrapped;
+export default Card;

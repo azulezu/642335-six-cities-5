@@ -11,16 +11,11 @@ import Map from "../map/map";
 import Header from "../header/header";
 import {SitePages} from "../../const";
 import {selectReviewsByOffer} from "../../core";
-import withMapMarkers from "../../hocs/with-map-markers";
-import withTransitHandler from "../../hocs/with-transit-handler";
 import withToggleBookmark from "../../hocs/with-toggle-bookmark";
 
 const OfferPage = (props) => {
-  const {activeOfferId, onChangeActiveOffer} = props;
   const {onBookmarkClick} = props;
   const {offer: currentOffer, nearOffers, reviews} = props;
-
-  const CardsListWrapped = withTransitHandler(CardsList);
 
   return (
     <div className="page">
@@ -139,8 +134,8 @@ const OfferPage = (props) => {
 
           <section className="property__map map">
             <Map
-              offers={nearOffers}
-              activeOfferId={activeOfferId}
+              offers={[].concat(currentOffer, nearOffers)}
+              activeOfferId={currentOffer.id}
               city={currentOffer.city}
             />
           </section>
@@ -150,9 +145,8 @@ const OfferPage = (props) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            <CardsListWrapped
+            <CardsList
               offers={nearOffers}
-              onEvent={onChangeActiveOffer}
               sitePage={SitePages.OFFER}
             />
 
@@ -168,12 +162,10 @@ OfferPage.propTypes = {
   offer: OfferPropTypes.isRequired,
   nearOffers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   reviews: PropTypes.arrayOf(ReviewPropTypes).isRequired,
-  activeOfferId: PropTypes.string,
-  onChangeActiveOffer: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
 };
 
-const wrappedOfferPage = withToggleBookmark(withMapMarkers(OfferPage));
+const wrappedOfferPage = withToggleBookmark(OfferPage);
 
 const mapStateToProps = (state) => ({
   reviews: selectReviewsByOffer(state.offer, state.reviews),

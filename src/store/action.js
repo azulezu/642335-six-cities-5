@@ -3,6 +3,7 @@ export const ActionType = {
   CHANGE_OFFER: `CHANGE_OFFER`,
   CHANGE_ORDER: `CHANGE_ORDER`,
   TOGGLE_BOOKMARK: `TOGGLE_BOOKMARK`,
+  SIGN_IN: `SIGN_IN`,
 };
 
 export const ActionCreator = {
@@ -21,5 +22,9 @@ export const ActionCreator = {
   toggleBookmark: (offer) => ({
     type: ActionType.TOGGLE_BOOKMARK,
     payload: offer,
+  }),
+  signIn: (email) => ({
+    type: ActionType.SIGN_IN,
+    payload: email,
   }),
 };
