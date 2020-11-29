@@ -1,0 +1,108 @@
+bedrooms: 3
+
+city:
+  location: {latitude: 50.938361, longitude: 6.959974, zoom: 13}
+  name: "Cologne"
+
+description: "Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs."
+
+goods: Array(7)
+  0: "Laptop friendly workspace"
+  1: "Washer"
+  2: "Towels"
+  3: "Fridge"
+  4: "Air conditioning"
+  5: "Baby seat"
+  6: "Breakfast"
+  length: 7
+
+host:
+  avatar_url: "img/avatar-angelina.jpg"
+  id: 25
+  is_pro: true
+  name: "Angelina"
+
+id: 1
+
+images: Array(14)
+  0: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg"
+  1: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+  2: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg"
+  3: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg"
+  4: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/4.jpg"
+  5: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/19.jpg"
+  6: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg"
+  7: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg"
+  8: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg"
+  9: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg"
+  10: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/1.jpg"
+  11: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg"
+  12: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg"
+  13: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg"
+  length: 14
+
+is_favorite: false
+
+is_premium: false
+
+location:
+  latitude: 50.957361
+  longitude: 6.9509739999999995
+  zoom: 16
+
+
+max_adults: 4
+
+preview_image: "https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg"
+
+price: 493
+
+rating: 3.8
+
+title: "The house among olive "
+
+type: "house"
+
+========================================
+
+
+0{
+  "id": 1,
+  "user": {
+    "id": 14,
+    "is_pro": true,
+    "name": "Corey",
+    "avatar_url": "https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg"
+  },
+  "rating": 5,
+  "comment": "The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.",
+  "date": "2020-11-01T13:38:44.752Z"
+}
+
+
+1{
+  "id": 2,
+  "user": {
+    "id": 12,
+    "is_pro": true,
+    "name": "Isaac",
+    "avatar_url": "https://assets.htmlacademy.ru/intensives/javascript-3/avatar/3.jpg"
+  },
+  "rating": 3,
+  "comment": "The deluxe room was a quite comfortable one with all the adequate facilities. The only thing that made me feel uncomfortable was the rude behavior of an impolite staff at the reception desk.",
+  "date": "2020-11-01T13:38:44.752Z"
+}
+
+
+2{
+  "id": 3,
+  "user": {
+    "id": 15,
+    "is_pro": false,
+    "name": "Kendall",
+    "avatar_url": "https://assets.htmlacademy.ru/intensives/javascript-3/avatar/6.jpg"
+  },
+  "rating": 3,
+  "comment": "I stayed here for one night and it was an unpleasant experience.",
+  "date": "2020-11-01T13:38:44.752Z"
+}
