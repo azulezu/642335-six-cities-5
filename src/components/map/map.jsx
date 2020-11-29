@@ -4,8 +4,8 @@ import OfferPropTypes from "../offer-page/offer.prop";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {Styles, MapSetting} from "../../const";
-import cities from '../../mocks/cities';
 
+const cities = [];
 
 class Map extends PureComponent {
   constructor(props) {

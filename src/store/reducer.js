@@ -1,8 +1,9 @@
 import {ActionType} from "./action";
 import {CitiesNames, DEFAULT_ORDER} from "../const";
 import {updateOfferBookmark} from "../core";
-import getOffers from '../mocks/offers';
-import getReviews from '../mocks/reviews';
+
+const getOffers = () => [];
+const getReviews = () => [];
 
 const initialState = {
   offers: getOffers(),
