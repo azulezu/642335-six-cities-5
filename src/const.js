@@ -16,8 +16,6 @@ export const PASSWORD_MIN_LENGTH = 0;
 export const REGEXP_EMAIL = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
 
 export const MapSetting = {
-  CITY: [52.38333, 4.9],
-  ZOOM: 12,
   ZOOM_CONTROL: false,
   ICON_URL: `img/pin.svg`,
   ACTIVE_ICON_URL: `img/pin-active.svg`,

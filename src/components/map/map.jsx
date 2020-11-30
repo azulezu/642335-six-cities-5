@@ -1,18 +1,17 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import OfferPropTypes from "../offer-page/offer.prop";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {Styles, MapSetting} from "../../const";
-
-const cities = [];
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
     // props.city - строка с названием
     // Map.city - объект {name: `city`, location: [latitude, longitude]}
-    this.city = cities.find((city) => city.name === this.props.city);
+    this.city = props.cities.find((city) => city.name === this.props.cityName);
   }
 
   componentDidMount() {
@@ -21,8 +20,8 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.city && this.city.name !== this.props.city) {
-      this.city = cities.find((city) => city.name === this.props.city);
+    if (this.city && this.city.name !== this.props.cityName) {
+      this.city = this.props.cities.find((city) => city.name === this.props.cityName);
       this._map.remove();
       this._initMap();
     }
@@ -37,7 +36,7 @@ class Map extends PureComponent {
   _initMap() {
     this._map = leaflet.map(`map-container`, {
       center: this.city.location,
-      zoom: MapSetting.ZOOM,
+      zoom: this.city.zoom,
       zoomControl: MapSetting.ZOOM_CONTROL,
       marker: true,
     });
@@ -79,7 +78,17 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   activeOfferId: PropTypes.string,
-  city: PropTypes.string.isRequired,
+  cityName: PropTypes.string.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.arrayOf(PropTypes.number).isRequired,
+    zoom: PropTypes.number.isRequired,
+  })),
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  cities: state.cities,
+});
+
+export {Map};
+export default connect(mapStateToProps)(Map);

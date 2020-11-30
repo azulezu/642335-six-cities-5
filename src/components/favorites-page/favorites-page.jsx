@@ -7,11 +7,11 @@ import CardsList from "../cards-list/cards-list";
 import Header from "../header/header";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import FavoritesContainer from "../favorites-container/favorites-container";
-import {SitePages, CitiesNames} from "../../const";
+import {SitePages} from "../../const";
 import {selectBookmarkedOffers, selectOffersByCities} from "../../core";
 
 const FavoritesPage = (props) => {
-  const {offersByCities, isAuthorized} = props;
+  const {offersByCities, isAuthorized, cityNames} = props;
 
   if (!isAuthorized) {
     return <Redirect to="/login" />;
@@ -37,7 +37,7 @@ const FavoritesPage = (props) => {
                 <h1 className="favorites__title">Saved listing</h1>
                 <ul className="favorites__list">
                   {
-                    CitiesNames.map((cityName) => {
+                    cityNames.map((cityName) => {
                       return offersByCities[cityName].length > 0 && (
                         <FavoritesContainer
                           key={cityName}
@@ -74,12 +74,14 @@ FavoritesPage.propTypes = {
       PropTypes.arrayOf(OfferPropTypes)
   ).isRequired,
   isAuthorized: PropTypes.bool.isRequired,
+  cityNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offersByCities: selectOffersByCities(
       selectBookmarkedOffers(state.offers)),
   isAuthorized: state.isAuthorized,
+  cityNames: state.cities.map((item) => item.name),
 });
 
 export {FavoritesPage};

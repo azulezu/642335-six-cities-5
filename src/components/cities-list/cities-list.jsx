@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
-import {CitiesNames} from "../../const";
 
 
 class CitiesList extends PureComponent {
@@ -20,11 +19,10 @@ class CitiesList extends PureComponent {
 
 
   render() {
-    const {city} = this.props;
-
+    const {city, cityNames} = this.props;
     return (
       <ul className="locations__list tabs__list">
-        {CitiesNames.map((cityName) =>
+        {cityNames.map((cityName) =>
           <li className="locations__item"
             key={cityName}
           >
@@ -47,7 +45,12 @@ class CitiesList extends PureComponent {
 CitiesList.propTypes = {
   city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
+  cityNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  cityNames: state.cities.map((item) => item.name),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity(cityName) {
@@ -56,4 +59,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {CitiesList};
-export default connect(null, mapDispatchToProps)(CitiesList);
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

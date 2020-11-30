@@ -1,15 +1,14 @@
 import {ActionType} from "./action";
-import {CitiesNames, DEFAULT_ORDER} from "../const";
+import Adapter from "../services/adapter";
+import {DEFAULT_ORDER} from "../const";
 import {updateOfferBookmark} from "../core";
 
-const getOffers = () => [];
-const getReviews = () => [];
-
 const initialState = {
-  offers: getOffers(),
-  reviews: getReviews(),
+  offers: [],
+  reviews: [],
+  cities: [],
   offer: null,
-  city: CitiesNames[0],
+  city: ``,
   order: DEFAULT_ORDER,
   email: ``,
   isAuthorized: false,
@@ -19,8 +18,15 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_OFFERS:
       return Object.assign({}, state, {
-        offers: action.payload,
+        offers: Adapter.convertOffers(action.payload),
         order: DEFAULT_ORDER,
+      });
+
+    case ActionType.SET_CITIES:
+      const allCities = Adapter.selectCities(action.payload);
+      return Object.assign({}, state, {
+        cities: allCities,
+        city: allCities[0].name,
       });
 
     case ActionType.CHANGE_CITY:

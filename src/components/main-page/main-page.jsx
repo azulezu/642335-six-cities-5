@@ -71,7 +71,7 @@ const MainPage = (props) => {
                         <Map
                           offers={offers}
                           activeOfferId={activeOfferId}
-                          city={city}
+                          cityName={city}
                         />
                       </section>
                     </div>

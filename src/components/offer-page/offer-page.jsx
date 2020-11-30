@@ -6,16 +6,16 @@ import ReviewPropTypes from "../review/review.prop";
 import {convertRatingToStyle} from "../../utils";
 import ReviewsList from "../reviews-list/reviews-list";
 import CommentForm from "../comment-form/comment-form";
-import CardsList from "../cards-list/cards-list";
+// import CardsList from "../cards-list/cards-list";
 import Map from "../map/map";
 import Header from "../header/header";
-import {SitePages} from "../../const";
+// import {SitePages} from "../../const";
 import {selectReviewsByOffer} from "../../core";
 import withToggleBookmark from "../../hocs/with-toggle-bookmark";
 
 const OfferPage = (props) => {
   const {onBookmarkClick} = props;
-  const {offer: currentOffer, nearOffers, reviews} = props;
+  const {offer: currentOffer, nearOffers = [], reviews} = props;
 
   return (
     <div className="page">
@@ -136,7 +136,7 @@ const OfferPage = (props) => {
             <Map
               offers={[].concat(currentOffer, nearOffers)}
               activeOfferId={currentOffer.id}
-              city={currentOffer.city}
+              cityName={currentOffer.city}
             />
           </section>
         </section>
@@ -145,10 +145,12 @@ const OfferPage = (props) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            <CardsList
-              offers={nearOffers}
-              sitePage={SitePages.OFFER}
-            />
+            {
+              // <CardsList
+              //   offers={nearOffers}
+              //   sitePage={SitePages.OFFER}
+              // />
+            }
 
           </section>
         </div>
