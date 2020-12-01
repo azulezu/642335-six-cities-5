@@ -1,4 +1,4 @@
-import {CitiesNames, SortOrders, DEFAULT_ORDER} from "./const";
+import {SortOrders, DEFAULT_ORDER} from "./const";
 
 export const sort = (offersList, order = DEFAULT_ORDER) => {
   switch (order) {
@@ -15,22 +15,10 @@ export const sort = (offersList, order = DEFAULT_ORDER) => {
   }
 };
 
-export const selectOffersByCity = (city, offersList) =>
-  offersList.filter((offer) => city === offer.city);
-
-export const selectBookmarkedOffers = (offersList) =>
-  offersList.filter((offer) => offer.isBookmarked);
 
 export const selectReviewsByOffer = (offer, reviewList) =>
   reviewList.filter((review) => offer.id === review.offerId);
 
-export const selectOffersByCities = (offersList) => {
-  const result = {};
-  CitiesNames.forEach((cityName) => {
-    result[cityName] = selectOffersByCity(cityName, offersList);
-  });
-  return result;
-};
 
 export const updateOfferBookmark = (offer, offers) => {
   const index = offers.indexOf(offer);

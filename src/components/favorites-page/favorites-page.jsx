@@ -8,7 +8,7 @@ import Header from "../header/header";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import FavoritesContainer from "../favorites-container/favorites-container";
 import {SitePages} from "../../const";
-import {selectBookmarkedOffers, selectOffersByCities} from "../../core";
+import {selectOffersListByCities, selectBookmarkedOffers} from "../../store/selectors";
 
 const FavoritesPage = (props) => {
   const {offersByCities, isAuthorized, cityNames} = props;
@@ -77,11 +77,11 @@ FavoritesPage.propTypes = {
   cityNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-const mapStateToProps = ({APP, DATA}) => ({
-  offersByCities: selectOffersByCities(
-      selectBookmarkedOffers(DATA.offers)),
-  isAuthorized: APP.isAuthorized,
-  cityNames: DATA.cities.map((item) => item.name),
+const mapStateToProps = (state) => ({
+  offersByCities: selectOffersListByCities(state,
+      selectBookmarkedOffers(state)),
+  isAuthorized: state.APP.isAuthorized,
+  cityNames: state.DATA.cities.map((item) => item.name),
 });
 
 export {FavoritesPage};

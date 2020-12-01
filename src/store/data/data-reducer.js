@@ -13,7 +13,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_OFFERS:
       return Object.assign({}, state, {
         offers: Adapter.convertOffers(action.payload),
-        // order: DEFAULT_ORDER,
       });
 
     case ActionType.SET_CITIES:

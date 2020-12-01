@@ -9,10 +9,9 @@ import MainPage from "../main-page/main-page";
 import FavoritesPage from "../favorites-page/favorites-page";
 import LoginPage from "../login-page/login-page";
 import OfferPage from "../offer-page/offer-page";
-import {selectOffersByCity} from "../../core";
 
 const App = (props) => {
-  const {offers, city, changeOffer} = props;
+  const {offers, changeOffer} = props;
 
   return (
     <BrowserRouter>
@@ -37,7 +36,7 @@ const App = (props) => {
 
             return (
               <OfferPage
-                nearOffers={selectOffersByCity(city, offers).slice(1, 4)}
+                nearOffers={[]}
               />
             );
           }}

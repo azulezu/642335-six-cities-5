@@ -10,7 +10,7 @@ import MainEmpty from "../main-empty//main-empty";
 import CitiesList from "../cities-list/cities-list";
 import SortingForm from "../sorting-form/sorting-form";
 import {SitePages} from "../../const";
-import {selectOffersByCity} from "../../core";
+import {selectOffersByCity} from "../../store/selectors";
 import withMapMarkers from "../../hocs/with-map-markers";
 import withTransitHandler from "../../hocs/with-transit-handler";
 
@@ -19,7 +19,6 @@ const CardsListWrapped = withTransitHandler(CardsList);
 const MainPage = (props) => {
   const {activeOfferId, onChangeActiveOffer} = props;
   const {offers, city} = props;
-
   const isEmpty = offers.length === 0;
 
   const mainClassName = `page__main page__main--index ${!isEmpty ? ``
@@ -97,9 +96,9 @@ MainPage.propTypes = {
 
 const wrappedMainPage = withMapMarkers(MainPage);
 
-const mapStateToProps = ({APP, DATA}) => ({
-  city: APP.city,
-  offers: selectOffersByCity(APP.city, DATA.offers),
+const mapStateToProps = (state) => ({
+  city: state.APP.city,
+  offers: selectOffersByCity(state),
 });
 
 export {wrappedMainPage};
