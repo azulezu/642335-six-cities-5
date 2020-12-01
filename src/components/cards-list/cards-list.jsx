@@ -55,8 +55,8 @@ CardsList.propTypes = {
   order: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  order: state.order,
+const mapStateToProps = ({APP}) => ({
+  order: APP.order,
 });
 
 export {CardsList};

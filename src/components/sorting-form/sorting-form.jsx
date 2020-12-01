@@ -70,8 +70,8 @@ SortingForm.propTypes = {
   onStatusToggleClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  order: state.order,
+const mapStateToProps = ({APP}) => ({
+  order: APP.order,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -77,11 +77,11 @@ FavoritesPage.propTypes = {
   cityNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = ({APP, DATA}) => ({
   offersByCities: selectOffersByCities(
-      selectBookmarkedOffers(state.offers)),
-  isAuthorized: state.isAuthorized,
-  cityNames: state.cities.map((item) => item.name),
+      selectBookmarkedOffers(DATA.offers)),
+  isAuthorized: APP.isAuthorized,
+  cityNames: DATA.cities.map((item) => item.name),
 });
 
 export {FavoritesPage};

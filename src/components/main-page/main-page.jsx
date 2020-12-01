@@ -97,9 +97,9 @@ MainPage.propTypes = {
 
 const wrappedMainPage = withMapMarkers(MainPage);
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: selectOffersByCity(state.city, state.offers),
+const mapStateToProps = ({APP, DATA}) => ({
+  city: APP.city,
+  offers: selectOffersByCity(APP.city, DATA.offers),
 });
 
 export {wrappedMainPage};

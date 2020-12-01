@@ -48,8 +48,8 @@ CitiesList.propTypes = {
   cityNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  cityNames: state.cities.map((item) => item.name),
+const mapStateToProps = ({DATA}) => ({
+  cityNames: DATA.cities.map((item) => item.name),
 });
 
 const mapDispatchToProps = (dispatch) => ({

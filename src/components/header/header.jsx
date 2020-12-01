@@ -46,9 +46,9 @@ Header.propTypes = {
   isAuthorized: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  email: state.email,
-  isAuthorized: state.isAuthorized,
+const mapStateToProps = ({APP}) => ({
+  email: APP.email,
+  isAuthorized: APP.isAuthorized,
 });
 
 export {Header};

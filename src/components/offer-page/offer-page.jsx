@@ -169,9 +169,9 @@ OfferPage.propTypes = {
 
 const wrappedOfferPage = withToggleBookmark(OfferPage);
 
-const mapStateToProps = (state) => ({
-  reviews: selectReviewsByOffer(state.offer, state.reviews),
-  offer: state.offer,
+const mapStateToProps = ({APP, DATA}) => ({
+  reviews: selectReviewsByOffer(APP.offer, DATA.reviews),
+  offer: APP.offer,
 });
 
 export {wrappedOfferPage};

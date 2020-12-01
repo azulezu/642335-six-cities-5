@@ -78,3 +78,9 @@ export const SortOptionText = {
 };
 
 export const DEFAULT_ORDER = SortOrders.POPULAR;
+export const DEFAULT_CITY_NAME = CitiesNames[0];
+
+export const NameSpace = {
+  APP: `APP`,
+  DATA: `DATA`,
+};

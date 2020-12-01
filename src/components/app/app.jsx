@@ -55,11 +55,11 @@ App.propTypes = {
   changeOffer: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  reviews: state.reviews,
-  offer: state.offer,
-  city: state.city,
+const mapStateToProps = ({APP, DATA}) => ({
+  offers: DATA.offers,
+  reviews: DATA.reviews,
+  offer: APP.offer,
+  city: APP.city,
 });
 
 const mapDispatchToProps = (dispatch) => ({

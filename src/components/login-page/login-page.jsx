@@ -62,9 +62,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-  isAuthorized: state.isAuthorized,
+const mapStateToProps = ({APP}) => ({
+  city: APP.city,
+  isAuthorized: APP.isAuthorized,
 });
 
 export {LoginPage};

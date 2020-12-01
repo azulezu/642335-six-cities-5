@@ -49,8 +49,8 @@ const withToggleBookmark = (Component) => {
     isAuthorized: PropTypes.bool.isRequired,
   };
 
-  const mapStateToProps = (state) => ({
-    isAuthorized: state.isAuthorized,
+  const mapStateToProps = ({APP}) => ({
+    isAuthorized: APP.isAuthorized,
   });
 
   const mapDispatchToProps = (dispatch) => ({

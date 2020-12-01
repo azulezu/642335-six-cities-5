@@ -82,8 +82,8 @@ Map.propTypes = {
   cityName: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  cities: state.cities,
+const mapStateToProps = ({DATA}) => ({
+  cities: DATA.cities,
 });
 
 export {Map};
