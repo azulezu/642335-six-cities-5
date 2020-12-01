@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 const OfferPropTypes = PropTypes.shape({
   id: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  previewImage: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isMarked: PropTypes.bool.isRequired,
   isBookmarked: PropTypes.bool.isRequired,

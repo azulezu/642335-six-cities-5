@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import OfferPropTypes from "../offer-page/offer.prop";
+import CityPropTypes from "../cities-list/city.prop";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {Styles, MapSetting} from "../../const";
@@ -9,7 +10,6 @@ import {Styles, MapSetting} from "../../const";
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    // props.city - строка с названием
     // Map.city - объект {name: `city`, location: [latitude, longitude]}
     this.city = props.cities.find((city) => city.name === this.props.cityName);
   }
@@ -77,13 +77,9 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
+  cities: PropTypes.arrayOf(CityPropTypes).isRequired,
   activeOfferId: PropTypes.string,
   cityName: PropTypes.string.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    location: PropTypes.arrayOf(PropTypes.number).isRequired,
-    zoom: PropTypes.number.isRequired,
-  })),
 };
 
 const mapStateToProps = (state) => ({

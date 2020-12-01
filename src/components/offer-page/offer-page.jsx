@@ -27,7 +27,7 @@ const OfferPage = (props) => {
 
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {currentOffer.images.map((image, index) =>
+              {currentOffer.images.slice(0, 6).map((image, index) =>
                 <div key={index}
                   className="property__image-wrapper"
                 >

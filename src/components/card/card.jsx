@@ -35,7 +35,7 @@ const Card = (props) => {
       <div className={`place-card__image-wrapper ${getImageClassName(modificator)}`}>
         <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image" alt="Place image"
-            src={offer.images[0]}
+            src={offer.previewImage}
             width={modificator === CardModificators.FAVORITES
               ? CardImageSizes.SMALL.width
               : CardImageSizes.BIG.width}
