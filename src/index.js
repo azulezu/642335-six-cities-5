@@ -20,9 +20,7 @@ const store = createStore(
     )
 );
 
-Promise.all([
-  store.dispatch(fetchOffers())
-])
+store.dispatch(fetchOffers())
   .then(() => {
     ReactDOM.render(
         <Provider store={store}>

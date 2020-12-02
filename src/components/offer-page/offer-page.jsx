@@ -145,13 +145,6 @@ const OfferPage = (props) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            {
-              // <CardsList
-              //   offers={nearOffers}
-              //   sitePage={SitePages.OFFER}
-              // />
-            }
-
           </section>
         </div>
       </main>
